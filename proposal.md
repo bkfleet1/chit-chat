@@ -61,18 +61,25 @@ The MVP for the proposed application is as follows:
 
 **Create an Account & Login**
 3. When the user clicks on the **Login** hyperlink in the upper right corner of the viewable screen, then the user is presented with an application **login form** that includes a link to **create an account**.
+
 4. When the user clicks on the **create an account** link, then the user is presented a **user profile form** that includes the user’s first and last name, address, email, and password.
+
 5. When the user has successfully completed the **create an account** form and clicks the **Register button**, then the user provided information is validated; if the information provided passes the validation checks, an account is created and the application returns the user to the **login form**; else the application provide an error message.
+
 6. When the user enters a registered **email address** and **user name** into the **login form** and clicks the **login button**, then the application verifies the user’s credentials; if the user has valid credentials, the application will (1. Issue a cookie to the user’s browser, (2. Log the user’s session in the application’s database, and (3. Redirect the user to the **Chat Board**.
 
 **Create a ShoutOut**
 7. When a user clicks on the **ShoutOut icon**, then the user is redirected to a screen with (1. a textarea to enter a message, and (2. **add media file icon** used to add an image or video.
+
 8. When the user clicks the **add media file icon**, then the user is presented with a modal-like feature that allows her/him to browse, select a file, and upload the file.
+
 9. When the user clicks the **ShoutOut button**, then the text is stored in the message is stored in the database and made visible on the **Chat Board**.
 
 **Create a Comment**
 10. When a user clicks on the **Comment icon**, then the user is redirected to a screen with (1. a textarea to enter a message, and (2. **add media file icon** used to add an image or video.
+
 11. When the user clicks the **add media file icon**, then the user is presented with a modal-like feature that allows her/him to browse, select a file, and upload the file.
+
 12. When the user clicks the **Comment button**, then the text is stored in the message is stored in the database and made visible on the **Chat Board**. Comments are nested in a ShoutOut.
 
 **Update a ShoutOut or Comment**
