@@ -1,0 +1,39 @@
+{
+  "name": "social-junk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "watch": "nodemon server.js",
+    "seed": "node seeds/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mssjhu9/social-junk.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mssjhu9/social-junk/issues"
+  },
+  "homepage": "https://github.com/mssjhu9/social-junk#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "connect-session-sequelize": "^7.1.2",
+    "console.table": "^0.10.0",
+    "express": "^4.17.3",
+    "express-handlebars": "^6.0.2",
+    "express-session": "^1.17.2",
+    "handlebars": "^4.7.7",
+    "mysql2": "^2.3.3",
+    "prettier": "^2.5.1"
+  },
+  "devDependencies": {
+    "eslint-config-prettier": "^8.4.0",
+    "i": "^0.3.7",
+    "jest": "^27.5.1"
+  }
+}
