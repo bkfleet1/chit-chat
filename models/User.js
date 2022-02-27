@@ -1,6 +1,6 @@
-const { Model, DataTypes } = require('sequelize');
+const { Model, DataTypes } = require("sequelize");
 
-const sequelize = require('../config/connection.js');
+const sequelize = require("../config/connection.js");
 
 class User extends Model {}
 
@@ -11,33 +11,55 @@ User.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
-      autoIncrement: true
+      autoIncrement: true,
     },
-    user_name: {
+    userfname: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
-  
-  user_password: {
-    type: DataTypes.INTEGER,
-    allowNull: false
-   
-  },
+    userlname: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    streetAddress: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    city: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    state: {
+      type: DataTypes.STRING(2),
+      allowNull: false,
+    },
+    zipCode: {
+      type: DataTypes.INTEGER(5),
+      allowNull: false,
+    },
+    userName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
 
-  comment: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    validate: {
-    }
-  }
-},
-   {
+    userPassword: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+
+    comment: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {},
+    },
+  },
+  {
     sequelize,
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'cred',
-   }
-  );
+    modelName: "cred",
+  }
+);
 
 module.exports = User;
