@@ -31,7 +31,7 @@ The following resources were used in the development of this project.
 > - Multer (version 1.4.4);
 > - MySQL Server (version 8.0.28);
 > - MySQL2 (version 2.3.3); and
-> - Sequelize (version 6.16.3)
+> - Sequelize (version 6.17.0)
 
 ## [Tech Stack](#stack)
 > - HTML 5
