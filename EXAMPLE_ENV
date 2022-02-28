@@ -1,4 +1,4 @@
-DB_NAME='chit_chat_db'
+DB_NAME='socialjunk_db'
 DB_USER=''
 DB_PW=''
 SECRET = ''
