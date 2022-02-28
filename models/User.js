@@ -13,11 +13,15 @@ User.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    userfname: {
+    userFname: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    userlname: {
+    userEmail: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    userLname: {
       type: DataTypes.STRING,
       allowNull: false,
     },

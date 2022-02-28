@@ -1,6 +1,6 @@
-const { Model, DataTypes } = require('sequelize');
+const { Model, DataTypes } = require("sequelize");
 
-const sequelize = require('../config/connection.js');
+const sequelize = require("../config/connection.js");
 
 class Shoutout extends Model {}
 
@@ -11,33 +11,33 @@ Shoutout.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
-      autoIncrement: true
+      autoIncrement: true,
     },
     userId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-   
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+
     message: {
       type: DataTypes.STRING(256),
-      allowNull: false
+      allowNull: false,
     },
     photo: {
-        type: DataTypes.BLOB,
-        allowNull: false
-      },
-      video: {
-        type: DataTypes.BLOB,
-        allowNull: false
-      },
-},
-   {
+      type: DataTypes.BLOB,
+      allowNull: false,
+    },
+    video: {
+      type: DataTypes.BLOB,
+      allowNull: false,
+    },
+  },
+  {
     sequelize,
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'shout',
-   }
-  );
+    modelName: "shout",
+  }
+);
 
 module.exports = Shoutout;
