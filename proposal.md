@@ -31,7 +31,7 @@ The following resources were used in the development of this project.
 > - Multer (version 1.4.4);
 > - MySQL Server (version 8.0.28);
 > - MySQL2 (version 2.3.3); and
-> - Sequelize (version 6.16.3)
+> - Sequelize (version 6.17.0)
 
 ## [Tech Stack](#stack)
 > - HTML 5
@@ -45,19 +45,19 @@ The following resources were used in the development of this project.
 ### User Profile
 ![user profile](./public/assets/images/screen2.png)
 
-### ShoutOut - Read
-![View ShoutOut](./public/assets/images/screen3.png)
+### Shout Out - Read
+![View Shout Out](./public/assets/images/screen3.png)
 
-### ShoutOut – Create
-![Create ShoutOut](./public/assets/images/screen4.png)
+### Shout Out – Create
+![Create Shout Out](./public/assets/images/screen4.png)
 
 ## [Minimum Viable Product](#MVP)
 The MVP for the proposed application is as follows:
 
-**View ShoutOuts and Comments**
-1. When the user connects to the application’s URL, then the user is presented with the **Chat Board**; which contains ShoutOuts and related comments.
-2. When a user clicks on a ShoutOut, then the user is redirected to a screen and presented with the original ShoutOut and all related comments.
->>> **Note: All users can Read ShoutOuts and comments, but only logged-in users can create, update, and delete content.**
+**View Shout Outs and Comments**
+1. When the user connects to the application’s URL, then the user is presented with the **Chat Board**; which contains Shout Outs and related comments.
+2. When a user clicks on a Shout Out, then the user is redirected to a screen and presented with the original Shout Out and all related comments.
+>>> **Note: All users can Read Shout Outs and comments, but only logged-in users can create, update, and delete content.**
 
 **Create an Account & Login**
 
@@ -69,13 +69,13 @@ The MVP for the proposed application is as follows:
 
 6. When the user enters a registered **email address** and **user name** into the **login form** and clicks the **login button**, then the application verifies the user’s credentials; if the user has valid credentials, the application will (1. Issue a cookie to the user’s browser, (2. Log the user’s session in the application’s database, and (3. Redirect the user to the **Chat Board**.
 
-**Create a ShoutOut**
+**Create a Shout Out**
 
-7. When a user clicks on the **ShoutOut icon**, then the user is redirected to a screen with (1. a textarea to enter a message, and (2. **add media file icon** used to add an image or video.
+7. When a user clicks on the **Shout Out icon**, then the user is redirected to a screen with (1. a textarea to enter a message, and (2. **add media file icon** used to add an image or video.
 
 8. When the user clicks the **add media file icon**, then the user is presented with a modal-like feature that allows her/him to browse, select a file, and upload the file.
 
-9. When the user clicks the **ShoutOut button**, then the text is stored in the message is stored in the database and made visible on the **Chat Board**.
+9. When the user clicks the **Shout Out button**, then the text is stored in the message is stored in the database and made visible on the **Chat Board**.
 
 **Create a Comment**
 
@@ -83,18 +83,18 @@ The MVP for the proposed application is as follows:
 
 11. When the user clicks the **add media file icon**, then the user is presented with a modal-like feature that allows her/him to browse, select a file, and upload the file.
 
-12. When the user clicks the **Comment button**, then the text is stored in the message is stored in the database and made visible on the **Chat Board**. Comments are nested in a ShoutOut.
+12. When the user clicks the **Comment button**, then the text is stored in the message is stored in the database and made visible on the **Chat Board**. Comments are nested in a Shout Out.
 
-**Update a ShoutOut or Comment**
+**Update a Shout Out or Comment**
 
-13. When the originator of a ShoutOut or Comment clicks the **edit icon**, then the user is allowed to modify the current text and/or media content, and save the new version.
+13. When the originator of a Shout Out or Comment clicks the **edit icon**, then the user is allowed to modify the current text and/or media content, and save the new version.
 
-**Delete a ShoutOut or Comment**
+**Delete a Shout Out or Comment**
 
-14. When the originator of a ShoutOut or Comment clicks the **delete icon**, then the user is allowed to delete the record.
+14. When the originator of a Shout Out or Comment clicks the **delete icon**, then the user is allowed to delete the record.
 
 ## Stretch Goals
 Project stretch goals include incorporating the following non-prioritized features:
 1. User can create personal groups;
-2. User can ShoutOut to personal groups;
+2. User can Shout Out to personal groups;
 3. Separate user profiles for people and companies;
