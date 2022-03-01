@@ -1,33 +1,33 @@
 const router = require("express").Router();
-const { Category, Product } = require("../../models");
+const { User } = require("../../models");
 
 // The `/api/categories` endpoint
 
-router.get("/", (req, res) => {
+// router.get("/", (req, res) => {
  
-  })
-    .then((data) => res.json(data))
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
-    });
+//   })
+//     .then((data) => res.json(data))
+//     .catch((err) => {
+//       console.log(err);
+//       res.status(500).json(err);
+//     });
 
 
 
-router.post("/", (req, res) => {
-  // create a new 
+// router.post("/", (req, res) => {
+//   // create a new 
  
-  })
-    .then((data) => res.json(data))
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
-    });
+//   })
+//     .then((data) => res.json(data))
+//     .catch((err) => {
+//       console.log(err);
+//       res.status(500).json(err);
+//     });
 
 
 router.put("/:id", (req, res) => {
   // update by its `id` value
-  Category.update(req.body, {
+  User.update(req.body, {
     where: {
       id: req.params.id,
     },
@@ -47,7 +47,7 @@ router.put("/:id", (req, res) => {
 
 router.delete("/:id", (req, res) => {
   // delete by its `id` value
-  Category.destroy({
+  User.destroy({
     where: {
       id: req.params.id,
     },
