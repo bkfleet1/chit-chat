@@ -13,13 +13,13 @@ router.get("/", (req, res) => {
         attributes: ["id", "userId", "shoutoutId", "message"],
         include: {
           model: User,
-          attributes: ["username"],
+          attributes: ["userFname","userLname"],
         },
       },
-      {
-        model: User,
-        attributes: ["username"],
-      },
+      // {
+      //   model: User,
+      //   attributes: ["username"],
+      // },
     ],
   })
     .then((dbPostData) => {

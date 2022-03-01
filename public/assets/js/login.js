@@ -1,24 +1,24 @@
 const loginFormHandler = async (event) => {
     event.preventDefault();
 
-    const email = document.querySelector('').value.trim();
-    const password = document.querySelector('').value.trim();
+    const userEmail = document.querySelector('userEmail').value.trim();
+    const userPassword = document.querySelector('userPassword').value.trim();
 
     if (email && password) {
         const response = await fetch('/api/users/login', {
             method: 'POST',
-            body: JSON.stringify({ email, password }),
-            headers: { 'Content-Type': 'apllication/json' },
+            body: JSON.stringify({ userEmail, userPassword }),
+            headers: { 'Content-Type': 'application/json' },
         });
 
         if (response.ok) {
             document.location.replace('/');
         } else {
-            alert('Can not log in.');
+            alert('Chit Chat cannot authenticate your credentials.');
         }
     }
 };
 
 document
-.querySelector('')
+.querySelector('.login-form')
 .addEventListener('submit', loginFormHandler);

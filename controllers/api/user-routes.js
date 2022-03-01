@@ -2,46 +2,48 @@ const router = require("express").Router();
 const { User, Shoutout, Comments } = require("../../models");
 const withAuth = require("../../utils/auth");
 
-//get/api/users
+
+// Get All Users Endpoint - /api/users/
 router.get("/", (req, res) => {
   User.findAll({
-    attributes: { exclude: ["password"] },
+    attributes: ["id", "userFname", "userLname", "city", "state"],
   })
-    .then((dbUserData) => res.json(dbUserData))
+    .then((data) => res.json(data))
     .catch((err) => {
       console.log(err);
       res.status(500).json(err);
     });
 });
 
-// get/api/user
+
+// Get a Single User by id Endpoint - /api/users/:id
 router.get("/:id", (req, res) => {
   User.findOne({
-    attributes: { exclude: ["password"] },
+    attributes: ["id", "userFname", "userLname", "city", "state"],
     where: {
       id: req.params.id,
     },
-    include: [
-      {
-        model: Shoutout,
-        attributes: ["id", "userId", "message"],
-      },
-      {
-        model: Comments,
-        attributes: ["id", "userId", "message"],
-        include: {
-          model: Shoutout,
-          attributes: ["userId"],
-        },
-      },
-    ],
+    // include: [
+    //   {
+    //     model: Shoutout,
+    //     attributes: ["id", "userId", "message"],
+    //   },
+    //   {
+    //     model: Comments,
+    //     attributes: ["id", "userId", "message"],
+    //     include: {
+    //       model: Shoutout,
+    //       attributes: ["userId"],
+    //     },
+    //   },
+    // ],
   })
-    .then((dbUserData) => {
-      if (!dbUserData) {
-        res.status(404).json({ message: "No user found with this id" });
+    .then((data) => {
+      if (!data) {
+        res.status(404).json({ message: `Chit Chat did not find user id:${req.params.id}`});
         return;
       }
-      res.json(dbUserData);
+      res.json(data);
     })
     .catch((err) => {
       console.log(err);
@@ -49,53 +51,49 @@ router.get("/:id", (req, res) => {
     });
 });
 
-//post api/users
-router.post("/", (req, res) => {
+
+// Create a Single New User Endpoint - POST /api/users/ 
+  // BODY {"userFname": "", "userLname": "", "streetAddress": "", "city": "", "state": "", "zipCode": "", "userEmail": "", "userPassword": ""}
+  //   {
+  //   "userFname": "Laura",
+  //   "userLname": "Chavez",
+  //   "streetAddress": "1888 Downers Lane",
+  //   "city": "Houston",
+  //   "state": "TX",
+  //   "zipCode": "77777",
+  //   "userEmail": "lc@gmail.com",
+  //   "userPassword": "p@ssword4"
+  // }
+  router.post("/", (req, res) => {
   User.create({
-    userName: req.body.userName,
+    userFname: req.body.userFname,
+    userLname: req.body.userLname,
+    streetAddress: req.body.streetAddress,
+    city: req.body.city,
+    state: req.body.state,
+    zipCode: req.body.zipCode,
     userEmail: req.body.userEmail,
     userPassword: req.body.userPassword,
-  }).then((dbUserData) => {
-    req.session.save(() => {
-      req.session.userId = dbUserData.id;
-      req.session.userName = dbUserData.userName;
-      // {{#if logIn}} on login handlerbar
-      req.session.logIn = true;
-      res.json(dbUserData);
+  })
+    .then(data => {
+      req.session.save(() => {
+        req.session.user_id = data.id;
+        req.session.username = data.userEmail;
+        req.session.loggedIn = true;
+
+        res.json(data);
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
     });
-  });
 });
 
-// Login
-router.post("/login", (req, res) => {
-  User.findOne({
-    where: {
-      userEmail: req.body.userEmail,
-    },
-  }).then((dbUserData) => {
-    if (!dbUserData) {
-      res.status(400).json({ message: "No user with that email address!" });
-      return;
-    }
-    const validPass = dbUserData.checkPassword(req.body.userPassword);
-    if (!validPassword) {
-      res.status(400).json({ message: "Incorrect password!" });
-      return;
-    }
-    req.session.save(() => {
-      // session variables
-      req.session.userId = dbUserData.id;
-      req.session.userName = dbUserData.userName;
-       // {{#if logIn}} on login handlerbar
-      req.session.logIn = true;
 
-      res.json({ user: dbUserData, message: "You are in!" });
-    });
-  });
-});
-
+// Update a Single User Record by id Endpoint - PUT /api/users/:id
+  // BODY can include one or more of the following: {"userFname": "", "userLname": "", "streetAddress": "", "city": "", "state": "", "zipCode": "", "userEmail": "", "userPassword": ""}
 router.put("/:id", withAuth, (req, res) => {
-  // update by its `id` value
   User.update(req.body, {
     where: {
       id: req.params.id,
@@ -103,7 +101,7 @@ router.put("/:id", withAuth, (req, res) => {
   })
     .then((data) => {
       if (!data) {
-        res.status(404).json({ message: "No data found with this id" });
+        res.status(404).json({ message: `Chit Chat could not update the user information, because we did not find user id:${req.params.id}` });
         return;
       }
       res.json(data);
@@ -114,8 +112,9 @@ router.put("/:id", withAuth, (req, res) => {
     });
 });
 
+
+// Delete a Single User by id Endpoint - DELETE /api/users/:id
 router.delete("/:id", withAuth, (req, res) => {
-  // delete by its `id` value
   User.destroy({
     where: {
       id: req.params.id,
@@ -123,7 +122,7 @@ router.delete("/:id", withAuth, (req, res) => {
   })
     .then((data) => {
       if (!data) {
-        res.status(404).json({ message: "No data found with that id." });
+        res.status(404).json({ message: `Chit Chat could not delete the record, because we did not find user id:${req.params.id}. Please try again.` });
         return;
       }
       res.json(data);
@@ -134,8 +133,38 @@ router.delete("/:id", withAuth, (req, res) => {
     });
 });
 
+
+// Login Endpoint - POST /api/users/login
+  // BODY {"userEmail": "", "userPassword": ""}
+  router.post("/login", (req, res) => {
+    User.findOne({
+      where: {
+        userEmail: req.body.userEmail,
+      },
+    }).then((data) => {
+      if (!data) {
+        res.status(400).json({ message: `Chit Chat did not find a user with that email address: ${req.body.userEmail}. Please try again.` });
+        return;
+      }
+      const validPass = data.checkPassword(req.body.userPassword);
+      if (!validPass) {
+        res.status(400).json({ message: "The password is not valid. Please try again!" });
+        return;
+      }
+      req.session.save(() => {
+        req.session.user_id = data.id;
+        req.session.userEmail = data.userEmail;
+         req.session.loggedIn = true;
+  
+        res.json({message: "Welcome to Chit Chat. Give a shout out to the world!" });
+      });
+    });
+  });
+
+
+// Logout Endpoint - POST /api/users/logout
 router.post("/logout", (req, res) => {
-  if (req.session.logIn) {
+  if (req.session.loggedIn) {
     req.session.destroy(() => {
       res.status(204).end();
     });
