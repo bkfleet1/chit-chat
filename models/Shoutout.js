@@ -24,11 +24,11 @@ Shoutout.init(
     },
     photo: {
       type: DataTypes.BLOB,
-      allowNull: false,
+      allowNull: true,
     },
     video: {
       type: DataTypes.BLOB,
-      allowNull: false,
+      allowNull: true,
     },
   },
   {
@@ -36,7 +36,7 @@ Shoutout.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: "shout",
+    modelName: "shoutout",
   }
 );
 

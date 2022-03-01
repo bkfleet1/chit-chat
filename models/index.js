@@ -1,37 +1,37 @@
 // import models
-const user = require("./User");
-const login = require("./LoginHistory");
-const comment = require("./Comments");
-const shoutout = require("./Shoutout");
+const User = require("./User");
+// const LoginHistory = require("./LoginHistory");
+const Comment = require("./Comments");
+const Shoutout = require("./Shoutout");
 
 // LoginHistory belongsTo User
-login.belongsTo(user, {
-  foreignKey: "userId",
-});
+// login.belongsTo(user, {
+//   foreignKey: "userId",
+// });
 
 // Shoutout belongsTo User
-shoutout.belongsTo(user, {
+Shoutout.belongsTo(User, {
   foreignKey: "userId",
 });
 
 // Shoutout have many Comments
-shoutout.hasMany(comment, {
+Shoutout.hasMany(Comment, {
   foreignKey: "shoutoutId",
 });
 
 // Comments belongTo Shoutout
-comment.belongsTo(shoutout, {
+Comment.belongsTo(Shoutout, {
   foreignKey: "shoutoutId",
 });
 
 // Comments belongTo User
-comment.belongsTo(user, {
+Comment.belongsTo(User, {
   foreignKey: "userId",
 });
 
 module.exports = {
-  user,
-  login,
-  comment,
-  shoutout,
+  User,
+  // login,
+  Comment,
+  Shoutout,
 };

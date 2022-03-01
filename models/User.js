@@ -17,10 +17,6 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    userEmail: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     userLname: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -41,28 +37,21 @@ User.init(
       type: DataTypes.INTEGER(5),
       allowNull: false,
     },
-    userName: {
+    userEmail: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-
     userPassword: {
       type: DataTypes.INTEGER,
       allowNull: false,
-    },
-
-    comment: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {},
-    },
+    }
   },
   {
     sequelize,
-    timestamps: false,
+    timestamps: true,
     freezeTableName: true,
     underscored: true,
-    modelName: "cred",
+    modelName: "user",
   }
 );
 

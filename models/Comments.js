@@ -29,11 +29,11 @@ Comments.init(
     },
     photo: {
         type: DataTypes.BLOB,
-        allowNull: false
+        allowNull: true
       },
       video: {
         type: DataTypes.BLOB,
-        allowNull: false
+        allowNull: true
       },
 },
    {
