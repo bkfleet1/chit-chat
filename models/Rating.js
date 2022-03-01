@@ -18,11 +18,11 @@ Rating.init(
         key: 'id'
       }
     },
-    post_id: {
+    shoutout_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'post',
+        model: 'shoutout',
         key: 'id'
       }
     },
@@ -33,7 +33,7 @@ Rating.init(
   },
   {
     sequelize,
-    timestamps: false,
+    timestamps: true,
     freezeTableName: true,
     underscored: true,
     modelName: 'rating'

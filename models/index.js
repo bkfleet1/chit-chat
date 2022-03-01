@@ -10,22 +10,21 @@ User.hasMany(Shoutout, {
 
 Shoutout.belongsTo(User, {
   foreignKey: 'user_id',
-  onDelete: 'SET NULL'
+  // onDelete: 'SET NULL'
 });
 
 User.belongsToMany(Shoutout, {
   through: Rating,
-  as: 'voted_posts',
-
+  as: 'rated_shoutouts',
   foreignKey: 'user_id',
-  onDelete: 'SET NULL'
+  // onDelete: 'SET NULL'
 });
 
 Shoutout.belongsToMany(User, {
   through: Rating,
-  as: 'voted_posts',
-  foreignKey: 'post_id',
-  onDelete: 'SET NULL'
+  as: 'rated_shoutouts',
+  foreignKey: 'shoutout_id',
+  // onDelete: 'SET NULL'
 });
 
 Rating.belongsTo(User, {
@@ -34,8 +33,8 @@ Rating.belongsTo(User, {
 });
 
 Rating.belongsTo(Shoutout, {
-  foreignKey: 'post_id',
-  onDelete: 'SET NULL'
+  foreignKey: 'shoutout_id',
+  // onDelete: 'SET NULL'
 });
 
 User.hasMany(Rating, {
@@ -43,26 +42,26 @@ User.hasMany(Rating, {
 });
 
 Shoutout.hasMany(Rating, {
-  foreignKey: 'post_id'
+  foreignKey: 'shoutout_id'
 });
 
 Comment.belongsTo(User, {
   foreignKey: 'user_id',
-  onDelete: 'SET NULL'
+  // onDelete: 'SET NULL'
 });
 
 Comment.belongsTo(Shoutout, {
-  foreignKey: 'post_id',
-  onDelete: 'SET NULL'
+  foreignKey: 'shoutout_id',
+  // onDelete: 'SET NULL'
 });
 
 User.hasMany(Comment, {
   foreignKey: 'user_id',
-  onDelete: 'SET NULL'
+  // onDelete: 'SET NULL'
 });
 
 Shoutout.hasMany(Comment, {
-  foreignKey: 'post_id'
+  foreignKey: 'shoutout_id'
 });
 
 module.exports = {

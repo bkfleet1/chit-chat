@@ -23,11 +23,11 @@ router.get("/:id", (req, res) => {
     where: {
       id: req.params.id,
     },
-    // include: [
-    //   {
-    //     model: Shoutout,
-    //     attributes: ["id", "userId", "message"],
-    //   },
+    include: [
+      {
+        model: Shoutout,
+        attributes: ["id", "user_id", "message", "photo", "video"],
+      },
     //   {
     //     model: Comments,
     //     attributes: ["id", "userId", "message"],
@@ -36,7 +36,7 @@ router.get("/:id", (req, res) => {
     //       attributes: ["userId"],
     //     },
     //   },
-    // ],
+    ],
   })
     .then((data) => {
       if (!data) {
@@ -154,7 +154,7 @@ router.delete("/:id", withAuth, (req, res) => {
       req.session.save(() => {
         req.session.user_id = data.id;
         req.session.userEmail = data.userEmail;
-         req.session.loggedIn = true;
+        req.session.loggedIn = true;
   
         res.json({message: "Welcome to Chit Chat. Give a shout out to the world!" });
       });

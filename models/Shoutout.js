@@ -15,7 +15,7 @@ Shoutout.init(
     },
     user_id: {
       type: DataTypes.INTEGER,
-      allowNull: true,
+      allowNull: false,
     },
 
     message: {
@@ -33,7 +33,7 @@ Shoutout.init(
   },
   {
     sequelize,
-    timestamps: false,
+    timestamps: true,
     freezeTableName: true,
     underscored: true,
     modelName: "shoutout",
