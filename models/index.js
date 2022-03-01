@@ -1,37 +1,73 @@
 // import models
 const User = require("./User");
-// const LoginHistory = require("./LoginHistory");
-const Comment = require("./Comments");
 const Shoutout = require("./Shoutout");
+const Comment = require("./Comment");
+const Rating = require("./Rating");
 
-// LoginHistory belongsTo User
-// login.belongsTo(user, {
-//   foreignKey: "userId",
-// });
+User.hasMany(Shoutout, {
+  foreignKey: 'user_id'
+});
 
-// Shoutout belongsTo User
 Shoutout.belongsTo(User, {
-  foreignKey: "userId",
+  foreignKey: 'user_id',
+  onDelete: 'SET NULL'
 });
 
-// Shoutout have many Comments
-Shoutout.hasMany(Comment, {
-  foreignKey: "shoutoutId",
+User.belongsToMany(Shoutout, {
+  through: Rating,
+  as: 'voted_posts',
+
+  foreignKey: 'user_id',
+  onDelete: 'SET NULL'
 });
 
-// Comments belongTo Shoutout
-Comment.belongsTo(Shoutout, {
-  foreignKey: "shoutoutId",
+Shoutout.belongsToMany(User, {
+  through: Rating,
+  as: 'voted_posts',
+  foreignKey: 'post_id',
+  onDelete: 'SET NULL'
 });
 
-// Comments belongTo User
+Rating.belongsTo(User, {
+  foreignKey: 'user_id',
+  onDelete: 'SET NULL'
+});
+
+Rating.belongsTo(Shoutout, {
+  foreignKey: 'post_id',
+  onDelete: 'SET NULL'
+});
+
+User.hasMany(Rating, {
+  foreignKey: 'user_id'
+});
+
+Shoutout.hasMany(Rating, {
+  foreignKey: 'post_id'
+});
+
 Comment.belongsTo(User, {
-  foreignKey: "userId",
+  foreignKey: 'user_id',
+  onDelete: 'SET NULL'
+});
+
+Comment.belongsTo(Shoutout, {
+  foreignKey: 'post_id',
+  onDelete: 'SET NULL'
+});
+
+User.hasMany(Comment, {
+  foreignKey: 'user_id',
+  onDelete: 'SET NULL'
+});
+
+Shoutout.hasMany(Comment, {
+  foreignKey: 'post_id'
 });
 
 module.exports = {
   User,
-  // login,
-  Comment,
   Shoutout,
+  Comment,
+  Rating
 };

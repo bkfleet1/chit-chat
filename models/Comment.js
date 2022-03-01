@@ -2,9 +2,9 @@ const { Model, DataTypes } = require('sequelize');
 
 const sequelize = require('../config/connection.js');
 
-class Comments extends Model {}
+class Comment extends Model {}
 
-Comments.init(
+Comment.init(
   {
     // define columns
     id: {
@@ -13,12 +13,12 @@ Comments.init(
       primaryKey: true,
       autoIncrement: true
     },
-    userId: {
+    user_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       
     },
-    shoutoutId: {
+    shoutout_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
@@ -45,4 +45,4 @@ Comments.init(
    }
   );
 
-module.exports = Comments;
+module.exports = Comment;
