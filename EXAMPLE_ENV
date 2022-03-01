@@ -1,4 +1,4 @@
 DB_NAME='socialjunk_db'
-DB_USER=''
-DB_PW=''
-SECRET = ''
+DB_USER='root'
+DB_PW='password'
+SECRET = 'test'

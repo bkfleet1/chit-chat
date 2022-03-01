@@ -59,6 +59,7 @@ router.post("/", (req, res) => {
     req.session.save(() => {
       req.session.userId = dbUserData.id;
       req.session.userName = dbUserData.userName;
+      // {{#if logIn}} on login handlerbar
       req.session.logIn = true;
       res.json(dbUserData);
     });
@@ -85,6 +86,7 @@ router.post("/login", (req, res) => {
       // session variables
       req.session.userId = dbUserData.id;
       req.session.userName = dbUserData.userName;
+       // {{#if logIn}} on login handlerbar
       req.session.logIn = true;
 
       res.json({ user: dbUserData, message: "You are in!" });
