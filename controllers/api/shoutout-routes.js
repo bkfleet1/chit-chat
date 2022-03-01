@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User, Comment, Shoutout } = require("../../models");
+const { Shoutout, User } = require("../../models");
 const sequelize = require("../../config/connection");
 const withAuth = require("../../utils/auth");
 
@@ -8,7 +8,7 @@ const withAuth = require("../../utils/auth");
 // Get All Shout Outs Endpoint - /api/users/
 router.get("/", (req, res) => {
   Shoutout.findAll({
-    attributes: ["id", "user_id", "message", "created_at", "updated_at"],
+    attributes: ["id", "user_id", "message", "photo", "video", "created_at", "updated_at"],
     include: [
       {
         model: User,
@@ -24,13 +24,13 @@ router.get("/", (req, res) => {
 });
 
 
-// Get a Single Shout Out by id Endpoint - /api/shoutout/:id
+// Get a Shout Out by id Endpoint - /api/shoutout/:id
 router.get("/:id", (req, res) => {
   Shoutout.findOne({
     where: {
       id: req.params.id,
     },
-    attributes: ["id", "user_id", "message", "created_at", "updated_at"],
+    attributes: ["id", "user_id", "message", "photo", "video", "created_at", "updated_at"],
     include: [
       {
         model: User,
@@ -40,7 +40,7 @@ router.get("/:id", (req, res) => {
   })
     .then((data) => {
       if (!data) {
-        res.status(404).json({ message: `Chit Chat could not find a Shout Out with id: ${req.params.id}.` });
+        res.status(404).json({ message: `Chit Chat could not find the Shout Out with id: ${req.params.id}.` });
         return;
       }
       res.json(data);
@@ -52,14 +52,11 @@ router.get("/:id", (req, res) => {
 });
 
 
-// Create a Single New Shout Out Endpoint - POST /api/shoutout/ 
-// {
-// 	"user_id": 4,
-// 	"message": "Beautiful day here in h-town. Enjoying time with my family and dogs. Living the dream!"
-// }
-
-
-
+// Create a Shout Out Endpoint - POST /api/shoutout/ 
+      // {
+      // 	"user_id": 4,
+      // 	"message": "Beautiful day here in h-town. Enjoying time with my family and dogs. Living the dream!"
+      // }
 router.post("/", withAuth, (req, res) => {
   Shoutout.create({
     user_id: req.session.user_id,
@@ -67,16 +64,22 @@ router.post("/", withAuth, (req, res) => {
     photo: req.body.photo,
     video: req.body.video
   })
-    .then((data) => res.json(data))
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
-    });
+  .then((data) => {
+    if (!data) {
+      res.status(404).json({ message: `Chit Chat could not create your Shout Out. Please try again!` });
+      return;
+    }
+    res.json(data);
+  })
+  .catch((err) => {
+    console.log(err);
+    res.status(500).json(err);
+  });
 });
 
 
 
-// Update a Single Shout Out Endpoint - PUT /api/shoutout/ 
+// Update a Shout Out Endpoint - PUT /api/shoutout/ 
 router.put("/:id", withAuth, (req, res) => {
   Shoutout.update(req.body, {
     where: {

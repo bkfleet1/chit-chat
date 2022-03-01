@@ -16,33 +16,32 @@ Comment.init(
     user_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      
+
     },
     shoutout_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-   
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
     message: {
       type: DataTypes.STRING(256),
       allowNull: false
     },
     photo: {
-        type: DataTypes.BLOB,
-        allowNull: true
-      },
-      video: {
-        type: DataTypes.BLOB,
-        allowNull: true
-      },
-},
-   {
+      type: DataTypes.BLOB,
+      allowNull: true
+    },
+    video: {
+      type: DataTypes.BLOB,
+      allowNull: true
+    },
+  },
+  {
     sequelize,
-    timestamps: false,
+    timestamps: true,
     freezeTableName: true,
     underscored: true,
     modelName: 'comment',
-   }
-  );
+  }
+);
 
 module.exports = Comment;

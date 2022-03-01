@@ -2,18 +2,18 @@ const { Comment } = require("../models");
 
 const data = [
   {
-    userId: 1,
-    shoutoutId: 5,
+    user_id: 1,
+    shoutout_id: 2,
     message: "This is amazing!",
   },
   {
-    userId: 4,
-    shoutoutId: 4,
+    user_id: 2,
+    shoutout_id: 1,
     message: "Wow, amazing work!",
   },
   {
-    userId: 1,
-    shoutoutId: 4,
+    user_id: 1,
+    shoutout_id: 3,
     message: "Awesome! kudos to everyone who have contributed",
   },
 ];
