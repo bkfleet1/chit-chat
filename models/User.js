@@ -42,7 +42,7 @@ User.init(
       allowNull: false,
     },
     userPassword: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
     }
   },
