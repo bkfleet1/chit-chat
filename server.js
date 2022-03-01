@@ -1,19 +1,12 @@
-<<<<<<< HEAD
 const path = require('path');
 const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
 
-=======
-const express = require("express");
-const routes = require("./controllers");
-// import sequelize connection
->>>>>>> a0b4e810661dc4f4833e3cfb10c1d2e469b24805
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-<<<<<<< HEAD
 const sequelize = require("./config/connection");
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 require('dotenv').config();
@@ -46,14 +39,3 @@ app.use(require('./controllers/'));
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log(`Now listening on port ${PORT}`));
 });
-=======
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-app.use(routes);
-
-// sync sequelize models to the database, then turn on the server
-app.listen(PORT, () => {
-  console.log(`App listening on port ${PORT}!`);
-});
->>>>>>> a0b4e810661dc4f4833e3cfb10c1d2e469b24805
