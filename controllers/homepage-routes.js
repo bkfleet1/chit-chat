@@ -6,29 +6,29 @@ router.get("/", (req, res) => {
   console.log(req.session);
 
   Shoutout.findAll({
-    attributes: ["id", "userId", "message"],
+    attributes: ["id", "user_id", "message"],
     include: [
       {
         model: Comment,
-        attributes: ["id", "userId", "shoutoutId", "message"],
+        attributes: ["id", "user_id", "shoutout_id", "message"],
         include: {
           model: User,
-          attributes: ["userFname","userLname"],
+          attributes: ["userFname", "userLname"],
         },
       },
-      // {
-      //   model: User,
-      //   attributes: ["username"],
-      // },
+       {
+        model: User,
+         attributes: ["username"],
+       },
     ],
   })
-    .then((dbPostData) => {
-      const shoutout = dbPostData.map((Shoutout) =>
+    .then((dbshoutoutData) => {
+      const shoutout = dbshoutoutData.map((Shoutout) =>
         Shoutout.get({ plain: true })
       );
       res.render("homepage", {
         shoutout,
-        logIn: req.session.logIn,
+        loggedIn: req.session.loggedIn,
       });
     })
     .catch((err) => {
@@ -38,7 +38,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/login", (req, res) => {
-  if (req.session.logIn) {
+  if (req.session.loggedIn) {
     res.redirect("/");
     return;
   }
@@ -47,7 +47,7 @@ router.get("/login", (req, res) => {
 });
 
 router.get("/signup", (req, res) => {
-  if (req.session.logIn) {
+  if (req.session.loggedIn) {
     res.redirect("/");
     return;
   }
@@ -55,16 +55,16 @@ router.get("/signup", (req, res) => {
   res.render("signup");
 });
 
-router.get("/post/:id", (req, res) => {
+router.get("/shoutout/:id", (req, res) => {
   Shoutout.findOne({
     where: {
       id: req.params.id,
     },
-    attributes: ["id", "userId", "message"],
+    attributes: ["id", "user_id", "message"],
     include: [
       {
         model: Comment,
-        attributes: ["id", "userId", "shoutoutId", "message"],
+        attributes: ["id", "user_id", "shoutout_id", "message"],
         include: {
           model: User,
           attributes: ["username"],
@@ -76,19 +76,19 @@ router.get("/post/:id", (req, res) => {
       },
     ],
   })
-    .then((dbPostData) => {
-      if (!dbPostData) {
+    .then((dbshoutoutData) => {
+      if (!dbshoutoutData) {
         res.status(404).json({ message: "Nothing found in this id" });
         return;
       }
 
       // serialize the data
-      const shoutout = dbPostData.get({ plain: true });
+      const shoutout = dbshoutoutData.get({ plain: true });
 
       // pass data to template
-      res.render("single-post", {
+      res.render("single-shoutout", {
         shoutout,
-        logIn: req.session.logIn,
+        loggedIn: req.session.loggedIn,
       });
     })
     .catch((err) => {
