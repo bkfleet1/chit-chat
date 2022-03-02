@@ -1,6 +1,6 @@
-const { Model, DataTypes } = require('sequelize');
+const { Model, DataTypes } = require("sequelize");
 
-const sequelize = require('../config/connection.js');
+const sequelize = require("../config/connection.js");
 
 class Comment extends Model {}
 
@@ -11,12 +11,11 @@ Comment.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
-      autoIncrement: true
+      autoIncrement: true,
     },
     user_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-
     },
     shoutout_id: {
       type: DataTypes.INTEGER,
@@ -24,15 +23,15 @@ Comment.init(
     },
     message: {
       type: DataTypes.STRING(256),
-      allowNull: false
+      allowNull: false,
     },
     photo: {
       type: DataTypes.BLOB,
-      allowNull: true
+      allowNull: true,
     },
     video: {
       type: DataTypes.BLOB,
-      allowNull: true
+      allowNull: true,
     },
   },
   {
@@ -40,7 +39,7 @@ Comment.init(
     timestamps: true,
     freezeTableName: true,
     underscored: true,
-    modelName: 'comment',
+    modelName: "comment",
   }
 );
 
