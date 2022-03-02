@@ -6,11 +6,11 @@ router.get("/", (req, res) => {
   console.log(req.session);
 
   Shoutout.findAll({
-    attributes: ["id", "userId", "message"],
+    attributes: ["id", "user_id", "message"],
     include: [
       {
         model: Comment,
-        attributes: ["id", "userId", "shoutoutId", "message"],
+        attributes: ["id", "user_id", "shoutout_id", "message"],
         include: {
           model: User,
           attributes: ["userFname","userLname"],
@@ -38,7 +38,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/login", (req, res) => {
-  if (req.session.logIn) {
+  if (req.session.loggedIn) {
     res.redirect("/");
     return;
   }
