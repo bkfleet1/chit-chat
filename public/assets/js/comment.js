@@ -1,0 +1,34 @@
+async function commentFormHandler(event) {
+  event.preventDefault();
+
+  const commentInput = document
+    .querySelector('textarea[name="commentInp"]')
+    .value.trim();
+
+  const shoutout_id = window.location.toString().split("/")[
+    window.location.toString().split("/").length - 1
+  ];
+
+  if (commentInput) {
+    const response = await fetch("/api/comments", {
+      method: "POST",
+      body: JSON.stringify({
+        shoutout_id,
+        commentInput,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.ok) {
+      document.location.reload();
+    } else {
+      alert(response.statusText);
+    }
+  }
+}
+
+document
+  .querySelector(".commenting")
+  .addEventListener("submit", commentFormHandler);
