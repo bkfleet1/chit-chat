@@ -1,5 +1,5 @@
     <div class="mb-3 pt-2">
-        <a href="/main/add/"><button id="add-shoutout" class="btn is-primary is-pulled-right">Adding shoutout</button></a>
+        <a href="/dashboard/add/"><button id="add-shoutout" class="btn is-primary is-pulled-right">Adding shoutout</button></a>
         
         <h2 class="title pb-4">main: shouting </h2><hr>
 {{#if shoutoutings.length}}
@@ -8,7 +8,7 @@
     {{#each shoutoutings as |shoutout|}}
         {{> shoutout-desc shoutout}}
         
-            <a href="/main/edit/{{shoutout.id}}"><button class="btn mb-3 ml-3 is-warning">edit shoutout</button></a>
+            <a href="/dashboard/edit/{{shoutout.id}}"><button class="btn mb-3 ml-3 is-warning">edit shoutout</button></a>
         </div>
     {{/each}}
 

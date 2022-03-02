@@ -11,7 +11,7 @@ const sequelize = require("./config/connection");
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 require('dotenv').config();
 
-const sess = {
+const ses = {
   secret: process.env.SECRET,
   cookie: {},
   resave: false,
@@ -21,7 +21,7 @@ const sess = {
   })
 };
 
-app.use(session(sess));
+app.use(session(ses));
 
 const helpers = require('./utils/helpers');
 

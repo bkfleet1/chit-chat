@@ -16,10 +16,10 @@ router.get("/", (req, res) => {
           attributes: ["userFname", "userLname"],
         },
       },
-      // {
-      //   model: User,
-      //   attributes: ["username"],
-      // },
+       {
+        model: User,
+         attributes: ["username"],
+       },
     ],
   })
     .then((dbshoutoutData) => {
@@ -28,7 +28,7 @@ router.get("/", (req, res) => {
       );
       res.render("homepage", {
         shoutout,
-        logIn: req.session.logIn,
+        loggedIn: req.session.loggedIn,
       });
     })
     .catch((err) => {
@@ -38,7 +38,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/login", (req, res) => {
-  if (req.session.logIn) {
+  if (req.session.loggedIn) {
     res.redirect("/");
     return;
   }
@@ -47,7 +47,7 @@ router.get("/login", (req, res) => {
 });
 
 router.get("/signup", (req, res) => {
-  if (req.session.logIn) {
+  if (req.session.loggedIn) {
     res.redirect("/");
     return;
   }
@@ -88,7 +88,7 @@ router.get("/shoutout/:id", (req, res) => {
       // pass data to template
       res.render("single-shoutout", {
         shoutout,
-        logIn: req.session.loggedIn,
+        loggedIn: req.session.loggedIn,
       });
     })
     .catch((err) => {
