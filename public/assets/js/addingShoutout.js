@@ -3,7 +3,7 @@ async function newFormHandler(event) {
   
     const shoutInput = document.querySelector('input[name="shoutInput"]').value;
   
-    const response = await fetch(`/api/shouts`, {
+    const response = await fetch(`/api/shoutout`, {
       method: 'POST',
       body: JSON.stringify({
         shoutInput

@@ -1,10 +1,10 @@
 const router = require("express").Router();
 const sequelize = require("../config/connection");
-const { Post, User, Comment } = require("../models");
+const { shoutout, User, Comment } = require("../models");
 const withAuth = require("../utils/auth");
 
 router.get("/", withAuth, (req, res) => {
-  Post.findAll({
+  shoutout.findAll({
     where: {
       // use the ID from the session
       user_id: req.session.user_id,
@@ -21,10 +21,10 @@ router.get("/", withAuth, (req, res) => {
       },
     ],
   })
-    .then((dbPostData) => {
+    .then((dbshoutoutData) => {
       // serialize data before passing to template
-      const shoutout = dbPostData.map((post) => post.get({ plain: true }));
-      res.render("dashboard", { shoutout, loggedIn: true });
+      const shoutout = dbshoutoutData.map((shoutout) => shoutout.get({ plain: true }));
+      res.render("main", { shoutout, loggedIn: true });
     })
     .catch((err) => {
       console.log(err);
@@ -33,7 +33,7 @@ router.get("/", withAuth, (req, res) => {
 });
 
 router.get("/edit/:id", withAuth, (req, res) => {
-  Post.findOne({
+  shoutout.findOne({
     where: {
       id: req.params.id,
     },
@@ -49,17 +49,17 @@ router.get("/edit/:id", withAuth, (req, res) => {
       },
     ],
   })
-    .then((dbPostData) => {
-      if (!dbPostData) {
+    .then((dbshoutoutData) => {
+      if (!dbshoutoutData) {
         res.status(404).json({ message: "No shout with this id" });
         return;
       }
 
       // serialize the data
-      const post = dbPostData.get({ plain: true });
+      const shoutout = dbshoutoutData.get({ plain: true });
 
-      res.render("edit-post", {
-        post,
+      res.render("edit-shoutout", {
+        shoutout,
         loggedIn: true,
       });
     })
@@ -69,8 +69,8 @@ router.get("/edit/:id", withAuth, (req, res) => {
     });
 });
 
-router.get("/create/", withAuth, (req, res) => {
-  Post.findAll({
+router.get("/add/", withAuth, (req, res) => {
+  shoutout.findAll({
     where: {
       // use the ID from the session
       user_id: req.session.user_id,
@@ -87,9 +87,9 @@ router.get("/create/", withAuth, (req, res) => {
       },
     ],
   })
-    .then((dbPostData) => {
-      const shoutout = dbPostData.map((post) => post.get({ plain: true }));
-      res.render("create-shout", { shoutout, loggedIn: true });
+    .then((dbshoutoutData) => {
+      const shoutout = dbshoutoutData.map((shoutout) => shoutout.get({ plain: true }));
+      res.render("add-shout", { shoutout, loggedIn: true });
     })
     .catch((err) => {
       console.log(err);

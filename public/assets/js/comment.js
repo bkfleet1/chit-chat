@@ -10,7 +10,7 @@ async function commentFormHandler(event) {
   ];
 
   if (commentInput) {
-    const response = await fetch("/api/comments", {
+    const response = await fetch("/api/comment", {
       method: "POST",
       body: JSON.stringify({
         shoutout_id,

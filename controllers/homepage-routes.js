@@ -22,8 +22,8 @@ router.get("/", (req, res) => {
       // },
     ],
   })
-    .then((dbPostData) => {
-      const shoutout = dbPostData.map((Shoutout) =>
+    .then((dbshoutoutData) => {
+      const shoutout = dbshoutoutData.map((Shoutout) =>
         Shoutout.get({ plain: true })
       );
       res.render("homepage", {
@@ -55,7 +55,7 @@ router.get("/signup", (req, res) => {
   res.render("signup");
 });
 
-router.get("/post/:id", (req, res) => {
+router.get("/shoutout/:id", (req, res) => {
   Shoutout.findOne({
     where: {
       id: req.params.id,
@@ -76,17 +76,17 @@ router.get("/post/:id", (req, res) => {
       },
     ],
   })
-    .then((dbPostData) => {
-      if (!dbPostData) {
+    .then((dbshoutoutData) => {
+      if (!dbshoutoutData) {
         res.status(404).json({ message: "Nothing found in this id" });
         return;
       }
 
       // serialize the data
-      const shoutout = dbPostData.get({ plain: true });
+      const shoutout = dbshoutoutData.get({ plain: true });
 
       // pass data to template
-      res.render("single-post", {
+      res.render("single-shoutout", {
         shoutout,
         logIn: req.session.loggedIn,
       });
