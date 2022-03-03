@@ -32,11 +32,10 @@ body {
   vertical-align: middle;
   -webkit-user-select: none;
   user-select: none;
-  background-color: transparent;
   box-shadow: var(--box-shadow);
   border: 0.0625rem solid var(--tertiary-color);
-  border-width: 2px;
-  padding: 0.55rem 0.95rem;
+  border-width: 1px;
+  /* padding: 0.55rem 0.95rem; */
   font-size: 1rem;
   line-height: 1.5;
   border-radius: 0.55rem;
@@ -75,9 +74,10 @@ fieldset:disabled a.btn {
 .btn-primary {
   color: var(--secondary-color);
   background-color: #e6e7ee;
-  border: 0.00025rem solid var(--tertiary-color);
-  /* border-color: #e6e7ee; */
-  box-shadow: inset 0 1px 0 rgba(236, 240, 243, 0.15), 0 1px 1px rgba(38, 40, 51, 0.075);
+  box-shadow: var(--box-shadow);
+  border: 0.0625rem solid var(--tertiary-color);
+  border-width: 2px;
+  margin-top: 6px;
 }
 
 .btn-primary:hover {
@@ -125,57 +125,143 @@ fieldset:disabled a.btn {
   flex-direction: column; */
 }
 
+.comment-form {
+  margin-bottom: 5%;
+}
+
+.comment {
+  padding: 1%;
+  margin-bottom: 1%;
+}
+
+.comment:nth-child(even) {
+  background-color: var(--primary-color);
+}
+
+.comment .meta {
+  font-size: 90%;
+  margin-bottom: .5%;
+  opacity: .6;
+}
+
 .fas {
   padding-right: 10px;
 }
 
-.login-form{
-  /* border: 1px solid black; */
-  padding: 30px;
-  text-align: center;
+.login-form {
+  box-shadow: var(--box-shadow);
+  border: 0.0625rem solid var(--tertiary-color);
+  border-width: 1px;
+  border-radius: 6px;
+  padding: 35px;
+  margin: 0;
+  display: flex;
+  width: max-content;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  top: 10%;
+}
+
+.post-shoutout-form {
+  box-shadow: var(--box-shadow);
+  border: 0.0625rem solid var(--tertiary-color);
+  border-width: 1px;
+  border-radius: 6px;
+  padding: 35px;
+  margin: 0;
+  display: flex;
+  width: max-content;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  top: 10%;
+}
+
+.signup-form {
+  box-shadow: var(--box-shadow);
+  border: 0.0625rem solid var(--tertiary-color);
+  border-width: 1px;
+  border-radius: 6px;
+  padding: 35px;
+  margin: 10px;
+  display: flex;
+  width: max-content;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  top: 10%;
+}
+
+#message {
   width: 100%;
-  /* flex-wrap: nowrap; */
+  height: 100px;
+}
+
+input[type="file"] {
+  /* position: absolute; */
+  /* z-index: -1; */
+  top: 10px;
+  left: 8px;
+  font-size: 17px;
+  color: #b8b8b8;
+  /* border: none; */
+}
+
+.signup-box{
+  display: flex;
+  justify-content: space-around;
+}
+
+.signup-div-1{
+  padding-right: 12px;
+}
+.signup-div-2{
+  padding-left: 12px;
 }
 
 .row {
   width: 100%;
-  display: flex;
-  flex-wrap: wrap;
   margin-right: -15px;
   margin-left: -15px;
+  display: flex;
+  width: auto;
+  justify-content: center;
 }
 
-/* .sec-form {
-  align-items: center;
-  align-content: center;
-} */
 
 a {
   text-decoration: none;
   color: var(--secondary-color);
-  font-weight: bold;
-  transition: color .1s;
+  /* font-weight: bold;
+  transition: color .1s; */
 }
+
+
 
 a:hover {
   color: var(--tertiary-color);
 }
 
+.signup-link {
+  text-align: right;
+}
 
 
-.post-list {
+/* .post-list {
   margin: 0;
   padding: 0;
-}
+} */
 
 textarea, input {
   padding: .5%;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: var(--box-shadow);
+  border: 0.0625rem solid var(--tertiary-color);
 }
 
 textarea:focus, input:focus {
-  outline: none;
+  outline:invert;
   border: 1px solid var(--secondary-color);
 }
 
@@ -185,11 +271,16 @@ textarea {
 }
 
 form > div {
-  margin-bottom: 2%;
+  padding: 6px;
+  margin: 6px;
 }
 
+/* form i {
+  clear: both;
+} */
+
 form label {
-  display: block;
+  display:block;
 }
 
 /* .wrapper {
@@ -201,7 +292,7 @@ form label {
   flex-direction: column;
 } */
 
-header {
+/* header {
   border-bottom: 1px solid #ccc;
   display: flex;
   justify-content: space-between;
@@ -216,7 +307,7 @@ header h1 {
 main {
   flex: 1;
   padding: 2% 4%;
-}
+} */
 
 
 
@@ -245,24 +336,7 @@ main {
   background-color: #1f9c13;
 }
 
-.comment-form {
-  margin-bottom: 5%;
-}
 
-.comment {
-  padding: 1%;
-  margin-bottom: 1%;
-}
-
-.comment:nth-child(odd) {
-  background-color: #fff5eb;
-}
-
-.comment .meta {
-  font-size: 90%;
-  margin-bottom: .5%;
-  opacity: .6;
-}
 
 .new-post-form input {
   width: 300px;

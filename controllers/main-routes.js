@@ -1,10 +1,10 @@
 const router = require("express").Router();
 const sequelize = require("../config/connection");
-const { shoutout, User, Comment } = require("../models");
+const { Shoutout, User, Comment } = require("../models");
 const withAuth = require("../utils/auth");
 
 router.get("/", withAuth, (req, res) => {
-  shoutout.findAll({
+  Shoutout.findAll({
     where: {
       // use the ID from the session
       user_id: req.session.user_id,
@@ -16,7 +16,7 @@ router.get("/", withAuth, (req, res) => {
         attributes: ["id", "user_id", "message"],
         include: {
           model: User,
-          attributes: ["username"],
+          attributes: ["userFname"],
         },
       },
     ],
@@ -33,7 +33,7 @@ router.get("/", withAuth, (req, res) => {
 });
 
 router.get("/edit/:id", withAuth, (req, res) => {
-  shoutout.findOne({
+  Shoutout.findOne({
     where: {
       id: req.params.id,
     },
@@ -44,7 +44,7 @@ router.get("/edit/:id", withAuth, (req, res) => {
         attributes: ["id", "user_id", "shoutout_id", "message"],
         include: {
           model: User,
-          attributes: ["username"],
+          attributes: ["userFname"],
         },
       },
     ],
@@ -70,7 +70,7 @@ router.get("/edit/:id", withAuth, (req, res) => {
 });
 
 router.get("/add/", withAuth, (req, res) => {
-  shoutout.findAll({
+  Shoutout.findAll({
     where: {
       // use the ID from the session
       user_id: req.session.user_id,
@@ -82,7 +82,7 @@ router.get("/add/", withAuth, (req, res) => {
         attributes: ["id", "user_id", "shoutout_id", "message"],
         include: {
           model: User,
-          attributes: ["username"],
+          attributes: ["userFname"],
         },
       },
     ],

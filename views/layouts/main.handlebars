@@ -16,7 +16,7 @@
     <header>
       <nav>
         {{#if loggedIn}}
-        <button id="logout" class="btn btn-primary" onclick="location.href='/logout'">logout</button>
+        <button id="logout" class="btn btn-primary" onclick="location.href='/api/users/logout'">logout</button>
         {{else}}
 
         <button id="login" class="btn btn-primary" onclick="location.href='/login'">login</button>
