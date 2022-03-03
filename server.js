@@ -2,10 +2,28 @@ const path = require('path');
 const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
+const multer = require('multer');
 
 
 const app = express();
+
+const fileStorageEngine = multer.diskStorage ({
+  destination: (req, file, cb) => {
+    cb(null, 'image')
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + "--" + file.originalname);
+  },
+});
+
+const upload = multer({ storage: fileStorageEngine });
+
+app.post('/single', upload.single('image'), (req, res) => {
+  res.send("File upload success");
+});
+
 const PORT = process.env.PORT || 3001;
+
 
 const sequelize = require("./config/connection");
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
