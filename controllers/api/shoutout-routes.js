@@ -1,21 +1,31 @@
 const router = require("express").Router();
-const { Shoutout, User } = require("../../models");
+const { Shoutout, User, Rating } = require("../../models");
 const sequelize = require("../../config/connection");
 const withAuth = require("../../utils/auth");
 
 
 
 // Get All Shout Outs Endpoint - /api/users/
-router.get("/", (req, res) => {
-  Shoutout.findAll({
-    attributes: ["id", "user_id", "message", "photo", "video", "created_at", "updated_at"],
-    include: [
-      {
-        model: User,
-        attributes: ["userFname", "userLname", "city", "state"],
-      },
-    ],
-  })
+  router.get("/", (req, res) => {
+    Shoutout.findAll({
+      attributes: [
+        "id",
+        "user_id",
+        "message",
+        "photo",
+        "video",
+        "created_at",
+        "updated_at",
+        [sequelize.literal('(SELECT COUNT(*) FROM rating WHERE shoutout.id = rating.shoutout_id)'), 'rating_count'],
+        [sequelize.literal('(SELECT AVG(rating) FROM rating WHERE shoutout.id = rating.shoutout_id)'), 'rating_average'],
+      ],
+      include: [
+        {
+          model: User,
+          attributes: ["userFname", "userLname", "city", "state"],
+        },
+      ],
+    })
     .then((data) => res.json(data))
     .catch((err) => {
       console.log(err);

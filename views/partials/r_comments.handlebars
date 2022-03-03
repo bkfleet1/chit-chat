@@ -1,0 +1,14 @@
+<!-- /public/js/comment.js -->
+<!-- GET ALL /api/comments/ -->
+<div class="comments">
+  {{#each this}}
+  <section class="comment">
+    <div class="meta">
+      {{user.userFname}} {{user.userLname}} on {{format_date created_at}}
+    </div>
+    <div class="text">
+      {{message}}
+    </div>
+  </section>
+  {{/each}}
+</div>

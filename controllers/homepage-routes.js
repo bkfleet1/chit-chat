@@ -1,42 +1,37 @@
 const router = require("express").Router();
 const sequelize = require("../config/connection");
-const { User, Shoutout, Comment } = require("../models");
+const { User, Shoutout, Comment, Rating } = require("../models");
 
 
-router.get("/", (req, res) => {
-  console.log(req.session);
-
-  Shoutout.findAll({
-    attributes: ["id", "user_id", "message"],
-    include: [
-      {
-        model: Comment,
-        attributes: ["id", "user_id", "shoutout_id", "message"],
-        include: {
+  router.get("/", (req, res) => {
+    Shoutout.findAll({
+      attributes: [
+        "id",
+        "user_id",
+        "message",
+        "photo",
+        "video",
+        "created_at",
+        "updated_at",
+        [sequelize.literal('(SELECT COUNT(*) FROM rating WHERE shoutout.id = rating.shoutout_id)'), 'rating_count'],
+        [sequelize.literal('(SELECT AVG(rating) FROM rating WHERE shoutout.id = rating.shoutout_id)'), 'rating_average'],
+      ],
+      include: [
+        {
           model: User,
-          attributes: ["userFname", "userLname"],
+          attributes: ["userFname", "userLname", "city", "state"],
         },
-      },
-       {
-        model: User,
-         attributes: ["username"],
-       },
-    ],
-  })
-    .then((dbshoutoutData) => {
-      const shoutout = dbshoutoutData.map((Shoutout) =>
-        Shoutout.get({ plain: true })
-      );
-      res.render("homepage", {
-        shoutout,
-        loggedIn: req.session.loggedIn,
-      });
+      ],
     })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
+        .then(data => {
+          const shoutouts = data.map(shoutout => shoutout.get({ plain: true }));
+          res.render('dashboard', { shoutouts });
+        })
+        .catch(err => {
+          console.log(err);
+          res.status(500).json(err);
+        });
     });
-});
 
 router.get("/login", (req, res) => {
   if (req.session.loggedIn) {
