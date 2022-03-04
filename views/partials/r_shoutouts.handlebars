@@ -1,16 +1,21 @@
-<article class="shoutout">
-  <div class="shout_container">
-    <div class="shout_user">
-      <span class="fas fa-user"></span> {{user.userFname}} {{user.userLname}} - {{user.city}}, {{user.state}}
-     </div>
-    <div class ="shout_message">
-      {{format_date created_at}} - {{message}}
-    </div>
-    <div class ="shout_info">
-      {{rating_count}} {{format_plural "person" rating_count}} rated this shout out at {{rating_average}}
-       {{!-- <a href="/comments/{{id}}">{{comments.length}} {{format_plural "comment" comments.length}}</a> --}}
+    <article class="shoutout">
+      <div class="shout_container">
+        <div class="shout_user">
+          <span class="fas fa-user"></span> {{user.userFname}}
+          {{user.userLname}} - {{user.city}}, {{user.state}}
+        </div>
+        <div class="shout_message">
+          {{format_date created_at}} - {{message}}
+        </div>
+
+        <div class="shout_info">
+          <div>
+            <a href="/shoutout/{{id}}"
+              >{{comments.length}} {{format_plural "comment"
+              comments.length}}</a>
+          </div>
+          <div>{{#if rating_average}} Rating: {{rating_average}} {{/if}}</div>
+          {{!-- <div class="messages">{{comments.message}}</div> --}}
+        </div>
       </div>
-    <div>
-   
-  </div>
-</article>
+    </article>

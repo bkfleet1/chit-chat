@@ -1,14 +1,18 @@
-<!-- /public/js/comment.js -->
-<!-- GET ALL /api/comments/ -->
-<div class="comments">
-  {{#each this}}
-  <section class="comment">
-    <div class="meta">
-      {{user.userFname}} {{user.userLname}} on {{format_date created_at}}
-    </div>
-    <div class="text">
-      {{message}}
-    </div>
-  </section>
-  {{/each}}
-</div>
+{{#if loggedIn}}
+<form class="comment-form">
+  <div>
+    <textarea name="comment-body"></textarea>
+  </div>
+  <div>
+    <button type="submit">submit</button>
+    {{!-- <button type="button" class="upvote-btn">rating</button> --}}
+  </div>
+</form>
+{{/if}}
+
+{{> comments shoutout.comments}}
+
+{{#if loggedIn}}
+<script src="/javascript/comment.js"></script>
+<script src="/javascript/rating.js"></script>
+{{/if}}

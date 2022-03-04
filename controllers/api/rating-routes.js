@@ -39,7 +39,7 @@ router.get("/", (req, res) => {
   
   
   // Create a Rating Endpoint - POST /api/rating/ 
-  router.post("/", withAuth, (req, res) => {
+  router.post("/", (req, res) => {
     Rating.create({
       user_id: req.session.user_id,
       shoutout_id: req.body.shoutout_id,

@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Shoutout, User, Rating } = require("../../models");
+const { Shoutout, User, Comment, Rating } = require("../../models");
 const sequelize = require("../../config/connection");
 const withAuth = require("../../utils/auth");
 
@@ -20,6 +20,15 @@ const withAuth = require("../../utils/auth");
         [sequelize.literal('(SELECT AVG(rating) FROM rating WHERE shoutout.id = rating.shoutout_id)'), 'rating_average'],
       ],
       include: [
+        {
+          model: Comment,
+          attributes: ["id", "user_id", "shoutout_id","message","photo","video", "created_at", "updated_at"],
+          include: [
+            {model: User,
+              attributes: ["userFname", "userLname", "city", "state"],
+            },
+          ],
+        },
         {
           model: User,
           attributes: ["userFname", "userLname", "city", "state"],
@@ -43,9 +52,18 @@ router.get("/:id", (req, res) => {
     attributes: ["id", "user_id", "message", "photo", "video", "created_at", "updated_at"],
     include: [
       {
+        model: Comment,
+        attributes: ["id", "user_id", "shoutout_id","message","photo","video", "created_at", "updated_at"],
+        include: [
+          {model: User,
+            attributes: ["userFname", "userLname", "city", "state"],
+          },
+        ],
+      },
+      {
         model: User,
         attributes: ["userFname", "userLname", "city", "state"],
-      }
+      },
     ],
   })
     .then((data) => {
