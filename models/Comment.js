@@ -33,6 +33,14 @@ Comment.init(
       type: DataTypes.BLOB,
       allowNull: true,
     },
+    updated_at: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    created_at: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
   },
   {
     sequelize,

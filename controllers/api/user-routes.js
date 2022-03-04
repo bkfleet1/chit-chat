@@ -73,6 +73,7 @@ router.get("/:id", (req, res) => {
     state: req.body.state,
     zipCode: req.body.zipCode,
     userEmail: req.body.userEmail,
+    username: req.body.username,
     userPassword: req.body.userPassword,
   })
     .then(data => {
@@ -154,6 +155,7 @@ router.delete("/:id", withAuth, (req, res) => {
       req.session.save(() => {
         req.session.user_id = data.id;
         req.session.userEmail = data.userEmail;
+        req.session.username = data.username;
         req.session.loggedIn = true;
   
         res.json({message: "Welcome to Chit Chat. Give a shout out to the world!" });

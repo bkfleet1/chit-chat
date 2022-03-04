@@ -44,6 +44,10 @@ User.init(
       type: DataTypes.INTEGER(5),
       allowNull: false,
     },
+     username: {
+          type: DataTypes.STRING,
+          allowNull: false
+        },
     userEmail: {
       type: DataTypes.STRING,
       allowNull: false,

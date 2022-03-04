@@ -8,8 +8,9 @@ const data = [
     city: "New York",
     state: "NY",
     zipCode: "11111",
-    userEmail: "martin_b@gmail.com",
-    userPassword: "p@ssword1",
+    userEmail: "test@abc.com",
+     username: "user1",
+    userPassword: "password1",
   },
   {
     userFname: "Mathew",
@@ -19,6 +20,7 @@ const data = [
     state: "FL",
     zipCode: "99999",
     userEmail: "mathew_b@gmail.com",
+     username: "user2",
     userPassword: "p@ssword2",
   },
   {
@@ -29,6 +31,7 @@ const data = [
     state: "LA",
     zipCode: "88888",
     userEmail: "s_michaels@gmail.com",
+     username: "user3",
     userPassword: "p@ssword3",
   },
 ];
