@@ -1,46 +1,125 @@
 const router = require("express").Router();
 const sequelize = require("../config/connection");
-const { shoutout, User, Comment } = require("../models");
+const { Shoutout, User, Comment, Rating } = require("../models");
 const withAuth = require("../utils/auth");
 
-router.get("/", withAuth, (req, res) => {
-  shoutout
-    .findAll({
-      where: {
-        // use the ID from the session
-        user_id: req.session.user_id,
-      },
-      attributes: ["id", "user_id", "message"],
-      include: [
-        {
-          model: Comment,
-          attributes: ["id", "user_id", "message"],
-          include: {
-            model: User,
-            attributes: ["username"],
+router.get("/", (req, res) => {
+  Shoutout.findAll({
+    attributes: [
+      "id",
+      "user_id",
+      "message",
+      "photo",
+      "video",
+      "created_at",
+      "updated_at",
+      [sequelize.literal('(SELECT COUNT(*) FROM rating WHERE shoutout.id = rating.shoutout_id)'), 'rating_count'],
+      [sequelize.literal('(SELECT AVG(rating) FROM rating WHERE shoutout.id = rating.shoutout_id)'), 'rating_average'],
+    ],
+    include: [
+      {
+        model: Comment,
+        attributes: ["id", "user_id", "shoutout_id","message","photo","video", "created_at", "updated_at"],
+        include: [
+          {model: User,
+            attributes: ["userFname", "userLname", "city", "state"],
           },
-        },
-        {
-          model: User,
-          attributes: ["username"],
-        },
-      ],
-    })
-    .then((dbshoutoutData) => {
-      // serialize data before passing to template
-      const shoutout = dbshoutoutData.map((shoutout) =>
-        shoutout.get({ plain: true })
-      );
-      res.render("main", { shoutout, loggedIn: true });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
-    });
+        ],
+      },
+      {
+        model: User,
+        attributes: ["userFname", "userLname", "city", "state"],
+      },
+    ],
+  })
+      .then(data => {
+        const shoutouts = data.map(shoutout => shoutout.get({ plain: true }));
+        res.render('dashboard', { shoutouts });
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  });
+
+
+// router.get("/", withAuth, (req, res) => {
+//   Shoutout
+//     .findAll({
+//       where: {
+//         // use the ID from the session
+//         user_id: req.session.user_id,
+//       },
+//       attributes: ["id", "user_id", "message"],
+//       include: [
+//         {
+//           model: Comment,
+//           attributes: ["id", "user_id", "shoutout_id", "message"],
+//           include: {
+//             model: User,
+//             attributes: ["id","userFname", "userLname", "city", "state"],
+//           },
+//         },
+//         {
+//           model: User,
+//           attributes: ["id"],
+//         },
+//       ],
+//     })
+//     .then(dbPostData => {
+//       const posts = dbPostData.map(post => post.get({ plain: true }));
+//       res.render('dashboard', { posts, loggedIn: true });
+//     })
+//     .catch(err => {
+//       console.log(err);
+//       res.status(500).json(err);
+//     });
+// });
+
+router.get("/shoutout/:id", (req, res) => {
+  Shoutout.findOne({
+    where: {
+      id: req.params.id,
+    },
+    attributes: [
+      "id",
+      "user_id",
+      "message",
+      "photo",
+      "video",
+      "created_at",
+      "updated_at",
+      [sequelize.literal('(SELECT COUNT(*) FROM rating WHERE shoutout.id = rating.shoutout_id)'), 'rating_count'],
+      [sequelize.literal('(SELECT AVG(rating) FROM rating WHERE shoutout.id = rating.shoutout_id)'), 'rating_average'],
+    ],
+    include: [
+      {
+        model: Comment,
+        attributes: ["id", "user_id", "shoutout_id","message","photo","video", "created_at", "updated_at"],
+        include: [
+          {model: User,
+            attributes: ["userFname", "userLname", "city", "state"],
+          },
+        ],
+      },
+      {
+        model: User,
+        attributes: ["userFname", "userLname", "city", "state"],
+      },
+    ],
+  })
+  .then(data => {
+    const shoutouts = data.map(shoutout => shoutout.get({ plain: true }));
+    res.render('dashboard', { shoutouts });
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(500).json(err);
+  });
 });
 
 router.get("/edit/:id", withAuth, (req, res) => {
-  shoutout
+  Shoutout
     .findOne({
       where: {
         id: req.params.id,
@@ -52,7 +131,7 @@ router.get("/edit/:id", withAuth, (req, res) => {
           attributes: ["id", "user_id", "shoutout_id", "message"],
           include: {
             model: User,
-            attributes: ["username"],
+            attributes: ["id"],
           },
         },
       ],
