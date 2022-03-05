@@ -1,19 +1,19 @@
-    <div class="mb-3 pt-2">
-        <a href="/dashboard/add/"><button id="add-shoutout" class="btn is-primary is-pulled-right">Adding shoutout</button></a>
+    <div class="mb-5 pt-3">
+        <a href="/dashboard/create/"><button id="create-post" class="button is-primary is-pulled-right">Create ShoutOut</button></a>
         
-        <h2 class="title pb-4">dashboard: shouting </h2><hr>
-{{#if shoutoutings.length}}
+        <h2 class="title pb-4">Shoutout</h2><hr>
+{{#if posts.length}}
     </div>
 
-    {{#each shoutoutings as |shoutout|}}
-        {{> shoutout-desc shoutout}}
+    {{#each posts as |post|}}
+        {{> post-info post}}
         
-            <a href="/dashboard/edit/{{shoutout.id}}"><button class="btn mb-3 ml-3 is-warning">edit shoutout</button></a>
+            <a href="/dashboard/edit/{{post.id}}"><button class="button mb-5 ml-5 is-warning">Edit Shoutout</button></a>
         </div>
     {{/each}}
 
 {{else}}
-<h6 class="pb-3 has-text-centered is-size-4 has-text-weight-bold is-family-sans-serif">No shoutout available</h6>
+<h6 class="pb-4 has-text-centered is-italic">No Post!</h6>
 
 {{/if}}
 

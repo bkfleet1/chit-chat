@@ -1,101 +1,67 @@
 const { Model, DataTypes } = require("sequelize");
-const sequelize = require("../config/connection.js");
-const bcrypt = require('bcrypt');
+const sequelize = require("../config/connection");
+const bcrypt = require("bcrypt");
 
+// create User model
 class User extends Model {
-  checkPassword(loginPass) {
-    return bcrypt.compareSync(loginPass, this.userPassword);
+  checkPassword(loginPw) {
+    return bcrypt.compareSync(loginPw, this.password);
   }
 }
-
-
+//define columns
 User.init(
   {
-    // define columns
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
     },
-    userFname: {
+    username: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    userLname: {
+    fName: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
-    userEmail: {
+    lName: {
       type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-      validate: {
-        isEmail: true
-      }
+      allowNull: true,
     },
-    userPassword: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [8]
-      }
-    },
-    streetAddress: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    city: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    state: {
-      type: DataTypes.STRING(2),
-      allowNull: false,
-    },
-    zipCode: {
-      type: DataTypes.INTEGER(5),
-      allowNull: false,
-    },
-<<<<<<< HEAD
-     username: {
-          type: DataTypes.STRING,
-          allowNull: false
-        },
-    userEmail: {
+    email: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
       validate: {
-        isEmail: true
-      }
+        isEmail: true,
+      },
     },
-    // define a password column
-    userPassword: {
+    password: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [8]
-      }
-    }
-=======
->>>>>>> 769fb6af7770ac8c67fb101d166511539d7e2aab
+        len: [4],
+      },
+    },
   },
   {
     hooks: {
-      async beforeCreate(data) {
-        data.userPassword = await bcrypt.hash(data.userPassword, 12);
-        return data;
+      async beforeCreate(newUserData) {
+        newUserData.password = await bcrypt.hash(newUserData.password, 9);
+        return newUserData;
       },
-
-      async beforeUpdate(data) {
-        data.userPassword = await bcrypt.hash(data.userPassword, 12);
-        return data;
-      }
+      async beforeUpdate(updatedUserData) {
+        updatedUserData.password = await bcrypt.hash(
+          updatedUserData.password,
+          9
+        );
+        return updatedUserData;
+      },
     },
 
     sequelize,
-    timestamps: true,
+    timestamps: false,
     freezeTableName: true,
     underscored: true,
     modelName: "user",
