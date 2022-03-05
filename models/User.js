@@ -1,68 +1,70 @@
 const { Model, DataTypes } = require("sequelize");
+const sequelize = require("../config/connection");
+const bcrypt = require("bcrypt");
 
-const sequelize = require("../config/connection.js");
-
-class User extends Model {}
-
+// create User model
+class User extends Model {
+  checkPassword(loginPw) {
+    return bcrypt.compareSync(loginPw, this.password);
+  }
+}
+//define columns
 User.init(
   {
-    // define columns
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
     },
-    userFname: {
+    username: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    userEmail: {
+    fName: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    lName: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    email: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: true,
+      },
     },
-    userLname: {
+    password: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    streetAddress: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    city: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    state: {
-      type: DataTypes.STRING(2),
-      allowNull: false,
-    },
-    zipCode: {
-      type: DataTypes.INTEGER(5),
-      allowNull: false,
-    },
-    userName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-
-    userPassword: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-
-    comment: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {},
+      validate: {
+        len: [4],
+      },
     },
   },
   {
+    hooks: {
+      async beforeCreate(newUserData) {
+        newUserData.password = await bcrypt.hash(newUserData.password, 9);
+        return newUserData;
+      },
+      async beforeUpdate(updatedUserData) {
+        updatedUserData.password = await bcrypt.hash(
+          updatedUserData.password,
+          9
+        );
+        return updatedUserData;
+      },
+    },
+
     sequelize,
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: "cred",
+    modelName: "user",
   }
 );
 
