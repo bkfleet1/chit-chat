@@ -1,12 +1,11 @@
 const { Model, DataTypes } = require("sequelize");
+const sequelize = require("../config/connection");
 
-const sequelize = require("../config/connection.js");
+// create our Post model
+class Post extends Model {}
 
-class Shoutout extends Model {}
-
-Shoutout.init(
+Post.init(
   {
-    // define columns
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -15,12 +14,22 @@ Shoutout.init(
     },
     user_id: {
       type: DataTypes.INTEGER,
+      references: {
+        model: "user",
+        key: "id",
+      },
+    },
+    title: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
-
-    message: {
-      type: DataTypes.STRING(256),
-      allowNull: false,
+    post_content: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
+    created: {
+      type: DataTypes.DATE,
+      allowNull: true,
     },
     photo: {
       type: DataTypes.BLOB,
@@ -33,11 +42,10 @@ Shoutout.init(
   },
   {
     sequelize,
-    timestamps: true,
     freezeTableName: true,
     underscored: true,
-    modelName: "shoutout",
+    modelName: "post",
   }
 );
 
-module.exports = Shoutout;
+module.exports = Post;

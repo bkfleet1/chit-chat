@@ -1,72 +1,30 @@
-// import models
-const User = require("./User");
-const Shoutout = require("./Shoutout");
-const Comment = require("./Comment");
-const Rating = require("./Rating");
+const User = require('./User');
+const Post = require('./Post');
+const Comment = require('./Comment');
 
-User.hasMany(Shoutout, {
-  foreignKey: 'user_id'
+//create associations
+User.hasMany(Post, {
+    foreignKey: 'user_id'
 });
 
-Shoutout.belongsTo(User, {
-  foreignKey: 'user_id',
-  // onDelete: 'SET NULL'
-});
-
-User.belongsToMany(Shoutout, {
-  through: Rating,
-  as: 'rated_shoutouts',
-  foreignKey: 'user_id',
-  // onDelete: 'SET NULL'
-});
-
-Shoutout.belongsToMany(User, {
-  through: Rating,
-  as: 'rated_shoutouts',
-  foreignKey: 'shoutout_id',
-  // onDelete: 'SET NULL'
-});
-
-Rating.belongsTo(User, {
-  foreignKey: 'user_id',
-  onDelete: 'SET NULL'
-});
-
-Rating.belongsTo(Shoutout, {
-  foreignKey: 'shoutout_id',
-  // onDelete: 'SET NULL'
-});
-
-User.hasMany(Rating, {
-  foreignKey: 'user_id'
-});
-
-Shoutout.hasMany(Rating, {
-  foreignKey: 'shoutout_id'
+Post.belongsTo(User, {
+    foreignKey: 'user_id',
 });
 
 Comment.belongsTo(User, {
-  foreignKey: 'user_id',
-  // onDelete: 'SET NULL'
+    foreignKey: 'user_id'
+  });
+  
+Comment.belongsTo(Post, {
+    foreignKey: 'post_id'
 });
-
-Comment.belongsTo(Shoutout, {
-  foreignKey: 'shoutout_id',
-  // onDelete: 'SET NULL'
-});
-
+  
 User.hasMany(Comment, {
-  foreignKey: 'user_id',
-  // onDelete: 'SET NULL'
+    foreignKey: 'user_id'
+});
+  
+Post.hasMany(Comment, {
+    foreignKey: 'post_id'
 });
 
-Shoutout.hasMany(Comment, {
-  foreignKey: 'shoutout_id'
-});
-
-module.exports = {
-  User,
-  Shoutout,
-  Comment,
-  Rating
-};
+module.exports = {User, Post, Comment};

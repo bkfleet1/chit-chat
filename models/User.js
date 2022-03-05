@@ -1,78 +1,67 @@
 const { Model, DataTypes } = require("sequelize");
-const sequelize = require("../config/connection.js");
-const bcrypt = require('bcrypt');
+const sequelize = require("../config/connection");
+const bcrypt = require("bcrypt");
 
+// create User model
 class User extends Model {
-  checkPassword(loginPass) {
-    return bcrypt.compareSync(loginPass, this.userPassword);
+  checkPassword(loginPw) {
+    return bcrypt.compareSync(loginPw, this.password);
   }
 }
-
-
+//define columns
 User.init(
   {
-    // define columns
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
     },
-    userFname: {
+    username: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    userLname: {
+    fName: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
-    userEmail: {
+    lName: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    email: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
       validate: {
-        isEmail: true
-      }
+        isEmail: true,
+      },
     },
-    userPassword: {
+    password: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [8]
-      }
-    },
-    streetAddress: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    city: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    state: {
-      type: DataTypes.STRING(2),
-      allowNull: false,
-    },
-    zipCode: {
-      type: DataTypes.INTEGER(5),
-      allowNull: false,
+        len: [4],
+      },
     },
   },
   {
     hooks: {
-      async beforeCreate(data) {
-        data.userPassword = await bcrypt.hash(data.userPassword, 12);
-        return data;
+      async beforeCreate(newUserData) {
+        newUserData.password = await bcrypt.hash(newUserData.password, 9);
+        return newUserData;
       },
-
-      async beforeUpdate(data) {
-        data.userPassword = await bcrypt.hash(data.userPassword, 12);
-        return data;
-      }
+      async beforeUpdate(updatedUserData) {
+        updatedUserData.password = await bcrypt.hash(
+          updatedUserData.password,
+          9
+        );
+        return updatedUserData;
+      },
     },
 
     sequelize,
-    timestamps: true,
+    timestamps: false,
     freezeTableName: true,
     underscored: true,
     modelName: "user",

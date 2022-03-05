@@ -1,31 +1,40 @@
 const { Model, DataTypes } = require("sequelize");
-
-const sequelize = require("../config/connection.js");
+const sequelize = require("../config/connection");
 
 class Comment extends Model {}
 
 Comment.init(
   {
-    // define columns
     id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
       primaryKey: true,
+      allowNull: false,
       autoIncrement: true,
     },
     user_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      references: {
+        model: "user",
+        key: "id",
+      },
     },
-    shoutout_id: {
+    post_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      references: {
+        model: "post",
+        key: "id",
+      },
     },
-    message: {
-      type: DataTypes.STRING(256),
+    comment_text: {
+      type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        len: [1],
+      },
     },
-    photo: {
+     photo: {
       type: DataTypes.BLOB,
       allowNull: true,
     },
@@ -33,10 +42,14 @@ Comment.init(
       type: DataTypes.BLOB,
       allowNull: true,
     },
+    created: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
   },
+
   {
     sequelize,
-    timestamps: true,
     freezeTableName: true,
     underscored: true,
     modelName: "comment",

@@ -1,21 +1,19 @@
-{{> r_shoutouts shoutout}}
 
+{{> post-info post}}
 {{#if loggedIn}}
 <form class="comment-form">
   <div>
-    <textarea name="message"></textarea>
+    <textarea class="ml-5" name="comment-body"></textarea>
   </div>
 
   <div>
-    <button type="submit">comment</button>
-    {{!-- <button type="button" class="upvote-btn">upvote</button> --}}
+    <button class="button is-warning ml-5 mb-5" type="submit">add comment</button>
   </div>
+  
 </form>
 {{/if}}
 
-{{> r_comments shoutout.comments}}
-
+{{> comments post.comments}}
 {{#if loggedIn}}
 <script src="/javascript/comment.js"></script>
-{{!-- <script src="/javascript/ratings.js"></script> --}}
 {{/if}}

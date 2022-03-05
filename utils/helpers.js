@@ -1,8 +1,21 @@
 module.exports = {
   format_date: (date) => {
-    return `${new Date(date).getMonth() + 1}/${new Date(
-      date
-    ).getDate()}/${new Date(date).getFullYear()}`;
+    let todayDate = new Date();
+    let dd = todayDate.getDate();
+    let mm = todayDate.getMonth() + 1;
+    const yyyy = todayDate.getFullYear();
+    if (dd < 10) {
+      dd = `0${dd}`;
+    }
+
+    if (mm < 10) {
+      mm = `0${mm}`;
+    }
+    todayDate = `${mm}-${dd}-${yyyy}`;
+    todayDate = `${mm}/${dd}/${yyyy}`;
+    todayDate = `${dd}-${mm}-${yyyy}`;
+    todayDate = `${dd}/${mm}/${yyyy}`;
+    return todayDate;
   },
   format_url: (url) => {
     return url
