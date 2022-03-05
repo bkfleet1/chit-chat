@@ -1,0 +1,22 @@
+  {{!-- <div class="mb-3 pt-2">
+  <a href="/dashboard/add/"><button id="add-shoutout" class="btn is-primary is-pulled-right">Adding shoutout</button></a>
+        
+<h2 class="title pb-4">dashboard </h2><hr> --}}
+<div class="container">
+  <div class="row">
+    {{#if shoutouts.length}}
+    <section>
+      <h2>Chat Board</h2>
+      <ul class="r_shout">
+      {{#each shoutouts as |shoutout|}}
+        <li>
+          {{> r_shoutouts shoutout}}
+          {{!-- <a href="/dashboard/edit/{{post.id}}" class="edit-link">Edit post</a> --}}
+        </li>
+      {{/each}}
+      </ul>
+    </section>
+    {{/if}}
+  </div>
+</div>
+

@@ -1,0 +1,21 @@
+{{> r_shoutouts shoutout}}
+
+{{#if loggedIn}}
+<form class="comment-form">
+  <div>
+    <textarea name="message"></textarea>
+  </div>
+
+  <div>
+    <button type="submit">comment</button>
+    {{!-- <button type="button" class="upvote-btn">upvote</button> --}}
+  </div>
+</form>
+{{/if}}
+
+{{> r_comments shoutout.comments}}
+
+{{#if loggedIn}}
+<script src="/javascript/comment.js"></script>
+{{!-- <script src="/javascript/ratings.js"></script> --}}
+{{/if}}

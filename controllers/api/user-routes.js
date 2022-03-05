@@ -68,21 +68,19 @@ router.get("/:id", (req, res) => {
   User.create({
     userFname: req.body.userFname,
     userLname: req.body.userLname,
+    userEmail: req.body.userEmail,
+    userPassword: req.body.userPassword,
     streetAddress: req.body.streetAddress,
     city: req.body.city,
     state: req.body.state,
     zipCode: req.body.zipCode,
-    userEmail: req.body.userEmail,
-    userPassword: req.body.userPassword,
   })
-    .then(data => {
-      req.session.save(() => {
-        req.session.user_id = data.id;
-        req.session.username = data.userEmail;
-        req.session.loggedIn = true;
-
-        res.json(data);
-      });
+    .then((data) => {
+      if (!data) {
+        res.status(404).json({ message: `Chit Chat could not create your user account` });
+        return;
+      }
+      res.json(data);
     })
     .catch(err => {
       console.log(err);

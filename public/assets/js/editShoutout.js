@@ -16,12 +16,12 @@ async function editFormHandler(event) {
   });
 
   if (response.ok) {
-    document.location.replace("/main/");
+    document.location.replace("/dashboard/");
   } else {
     alert(response.statusText);
   }
 }
 
 document
-  .querySelector(".editShout")
+  .querySelector(".editShout-form")
   .addEventListener("submit", editFormHandler);

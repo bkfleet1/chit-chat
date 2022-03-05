@@ -1,0 +1,23 @@
+    <div class="container">
+      <div class="row">
+        <form class="post-shoutout-form" method="POST" action="/profile-upload-single" enctype="multipart/form-data">
+          <!-- class="new-post-form"-->
+          <p>create a shout out</p>
+          <div>
+            <label for="message">message</label>
+            <input type="textarea" id="message" name="message" />
+          </div>
+          <div>
+              <!-- Multer file upload function-->
+            <input type="file" class="btn btn-primary upload" name="profile-file" required/>
+            
+          </div>
+          <div>
+            <button type="submit" class="btn btn-primary">signup</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+    <script src="/assets/js/createShoutout.js"></script>

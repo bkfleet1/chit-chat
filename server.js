@@ -23,32 +23,12 @@ var upload = multer({ storage: storage })
 app.use(express.static(__dirname + '/public'));
 app.use('/uploads', express.static('uploads'));
 
-app.post('/profile-upload-single', upload.single('profile-file'), function (req, res, next) {
-console.log(JSON.stringify(req.file))
-var response = '<a href="/">Home</a><br>'
-response += "Files uploaded successfully.<br>"
-response += `<img src="${req.file.path}" /><br>`
-return res.send(response)
-})
-
-app.post('/profile-upload-multiple', upload.array('profile-files', 12), function (req, res, next) {
-  var response = '<a href="/">Home</a><br>'
-  response += "Files uploaded successfully.<br>"
-  for(var i=0;i<req.files.length;i++){
-      response += `<img src="${req.files[i].path}" /><br>`
-  }
-  
-  return res.send(response)
-})
-
-
-
 
 const sequelize = require("./config/connection");
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 require('dotenv').config();
 
-const sess = {
+const ses = {
   secret: process.env.SECRET,
   cookie: {},
   resave: false,
@@ -58,7 +38,7 @@ const sess = {
   })
 };
 
-app.use(session(sess));
+app.use(session(ses));
 
 const helpers = require('./utils/helpers');
 
