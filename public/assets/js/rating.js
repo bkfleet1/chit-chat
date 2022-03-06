@@ -1,4 +1,4 @@
-document.ready(function() {
+$(document).ready(function() {
     $("form#ratingForm").submit(function(e) {
     e.preventDefault(); 
     if ($("#ratingForm :radio:checked").length == 0) {
