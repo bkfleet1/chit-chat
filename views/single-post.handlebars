@@ -1,7 +1,8 @@
 
 {{> post-info post}}
 {{#if loggedIn}}
-<form class="comment-form">
+<div id="status"></div>
+<form class="comment-form" id="ratingForm">
   <div>
     <textarea class="ml-5" name="comment-body"></textarea>
   </div>
@@ -15,11 +16,14 @@
         <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="1 Star">1 star</label>
     </fieldset>
   </div>
+  <div class="clearfix"></div>
   <div>
-    <button class="button is-warning ml-5 mb-5" type="submit">add comment</button>
+    <button class="button is-warning ml-5 mb-5 submit clearfix" type="submit">add comment</button>
   </div>
   
 </form>
+{{!-- <script src="/javascript/comment.js"></script> --}}
+
 {{/if}}
 
 {{> comments post.comments}}
