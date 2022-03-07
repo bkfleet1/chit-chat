@@ -6,7 +6,14 @@ const withAuth = require("../../utils/auth");
 // get all users
 router.get("/", (req, res) => {
   Post.findAll({
-    attributes: ["id", "title", "created", "post_content"],
+    attributes: [
+      "id",
+      "title",
+      "post_content",
+      "created",
+      [sequelize.literal('(SELECT COUNT(*) FROM comment WHERE post.id = comment.post_id)'), 'comment_count'],
+      [sequelize.literal('(SELECT AVG(rate) FROM comment WHERE post.id = comment.post_id)'), 'rating_average'],
+    ],
     order: [["created", "DESC"]],
     include: [
   
@@ -15,12 +22,12 @@ router.get("/", (req, res) => {
         attributes: ["id", "comment_text", "post_id", "user_id", "video","photo","rate","created"],
         include: {
           model: User,
-          attributes: ["username", "fName", "lName"],
+          attributes: ["username"],
         },
       },
       {
         model: User,
-        attributes: ["username", "fName", "lName"],
+        attributes: ["username"],
       },
     ],
   })
@@ -36,18 +43,25 @@ router.get("/:id", (req, res) => {
     where: {
       id: req.params.id,
     },
-    attributes: ["id", "title", "created", "post_content"],
+    attributes: [
+      "id",
+      "title",
+      "post_content",
+      "created",
+      [sequelize.literal('(SELECT COUNT(*) FROM comment WHERE post.id = comment.post_id)'), 'comment_count'],
+      [sequelize.literal('(SELECT AVG(rate) FROM comment WHERE post.id = comment.post_id)'), 'rating_average'],
+    ],
     include: [
       {
         model: User,
-        attributes: ["username", "fName", "lName"],
+        attributes: ["username", "fname", "lname"],
       },
       {
         model: Comment,
         attributes: ["id", "comment_text", "post_id", "user_id", "video","photo","rate", "created"],
         include: {
           model: User,
-          attributes: ["username", "fName", "lName"],
+          attributes: ["username", "fname", "lname"],
         },
       },
     ],

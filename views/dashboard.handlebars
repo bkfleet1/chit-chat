@@ -1,20 +1,18 @@
     <div class="mb-5 pt-3">
-        <a href="/dashboard/create/"><button id="create-post" class="button is-primary is-pulled-right">Create ShoutOut</button></a>
-        
-        <h2 class="title pb-4">Shoutout</h2><hr>
-{{#if posts.length}}
+        <a href="/dashboard/create/"><button id="create-post" class="button is-primary is-pulled-right">Create</button></a>
+        <h2 class="title pb-4">Shout Out</h2><hr>
     </div>
-
-    {{#each posts as |post|}}
-        {{> post-info post}}
-        
-            <a href="/dashboard/edit/{{post.id}}"><button class="button mb-5 ml-5 is-warning">Edit Shoutout</button></a>
-        </div>
-    {{/each}}
-
-{{else}}
-<h6 class="pb-4 has-text-centered is-italic">No Post!</h6>
-
-{{/if}}
+    {{#if posts.length}}
+        <ol class="post-list">
+        {{#each posts as |post|}}
+            <li>
+            {{> post-info post }}
+            </li>
+        <a href="/dashboard/edit/{{post.id}}"><button class="button mb-5 ml-5 is-warning">Edit</button></a>
+        {{/each}}
+        </ol>
+    {{else}}
+    <h6 class="pb-4 has-text-centered is-italic">No Shout Out Found!</h6>
+    {{/if}}
 
 

@@ -9,27 +9,30 @@ router.get("/", withAuth, (req, res) => {
       // use the ID from the session
       user_id: req.session.user_id,
     },
-    attributes: ["id", "title", "created", "post_content"],
+    attributes: [
+      "id",
+      "title",
+      "post_content",
+      "photo",
+      "video",
+      "rate",
+      "created",
+      [sequelize.literal('(SELECT COUNT(*) FROM comment WHERE post.id = comment.post_id)'), 'comment_count'],
+      [sequelize.literal('(SELECT AVG(rate) FROM comment WHERE post.id = comment.post_id)'), 'rating_average'],
+    ],
     include: [
       {
         model: Comment,
-        attributes: [
-          "id",
-          "comment_text",
-          "post_id",
-          "user_id",
-          "photo",
-          "video",
-          "created",
+        attributes: ["id", "user_id", "post_id","comment_text","photo","video","rate","created"],
+        include: [
+          {model: User,
+            attributes: ["username"],
+          },
         ],
-        include: {
-          model: User,
-          attributes: ["username", "fName", "lName"],
-        },
       },
       {
         model: User,
-        attributes: ["username", "fName", "lName"],
+        attributes: ["username"],
       },
     ],
   })
@@ -49,27 +52,30 @@ router.get("/edit/:id", withAuth, (req, res) => {
     where: {
       id: req.params.id,
     },
-    attributes: ["id", "title", "created", "post_content"],
+    attributes: [
+      "id",
+      "title",
+      "post_content",
+      "photo",
+      "video",
+      "rate",
+      "created",
+      [sequelize.literal('(SELECT COUNT(*) FROM comment WHERE post.id = comment.post_id)'), 'comment_count'],
+      [sequelize.literal('(SELECT AVG(rate) FROM comment WHERE post.id = comment.post_id)'), 'rating_average'],
+    ],
     include: [
       {
         model: Comment,
-        attributes: [
-          "id",
-          "comment_text",
-          "post_id",
-          "user_id",
-          "photo",
-          "video",
-          "created",
+        attributes: ["id", "user_id", "post_id","comment_text","photo","video","rate","created"],
+        include: [
+          {model: User,
+            attributes: ["username"],
+          },
         ],
-        include: {
-          model: User,
-          attributes: ["username", "fName", "lName"],
-        },
       },
       {
         model: User,
-        attributes: ["username", "fName", "lName"],
+        attributes: ["username"],
       },
     ],
   })
@@ -99,28 +105,30 @@ router.get("/create/", withAuth, (req, res) => {
       // use the ID from the session
       user_id: req.session.user_id,
     },
-    attributes: ["id", "title", "created", "post_content"],
+    attributes: [
+      "id",
+      "title",
+      "post_content",
+      "photo",
+      "video",
+      "rate",
+      "created",
+      [sequelize.literal('(SELECT COUNT(*) FROM comment WHERE post.id = comment.post_id)'), 'comment_count'],
+      [sequelize.literal('(SELECT AVG(rate) FROM comment WHERE post.id = comment.post_id)'), 'rating_average'],
+    ],
     include: [
       {
         model: Comment,
-        attributes: [
-          "id",
-          "comment_text",
-          "post_id",
-          "user_id",
-          "photo",
-          "video",
-          "rate",
-          "created",
+        attributes: ["id", "user_id", "post_id","comment_text","photo","video","rate","created"],
+        include: [
+          {model: User,
+            attributes: ["username"],
+          },
         ],
-        include: {
-          model: User,
-          attributes: ["username", "fName", "lName"],
-        },
       },
       {
         model: User,
-        attributes: ["username", "lName", "lName"],
+        attributes: ["username"],
       },
     ],
   })

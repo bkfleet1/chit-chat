@@ -33,7 +33,11 @@
     margin: 0;
     padding: 0;
   }
-  
+
+  .comment_text {
+    width: 100%;
+  }
+
   textarea, input {
     padding: .5%;
     border-radius: 5px;
@@ -106,6 +110,9 @@
     background-color: #ff643d;
   }
   
+  li {
+    list-style: none;
+  }
   .post {
     margin-bottom: 2%;
     line-height: 150%;

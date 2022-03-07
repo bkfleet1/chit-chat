@@ -6,10 +6,16 @@
         on
         {{format_date created}}
       </div>
-      <div class="text">
+      <div class="text comment_text">
         {{comment_text}}
         {{video}}
         {{photo}}
+      </div>
+      <div class="rated">
+        <div
+          class="Stars"
+          style="--rating: {{rate}};">
+        </div>
       </div>
     </section>
   {{/each}}
