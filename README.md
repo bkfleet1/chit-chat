@@ -2,9 +2,11 @@
 ​
 ## [Description](#description)
 Chit Chat is a mobile-responsive, social media platform on which users can post messages and pictures - known as "Shout Outs". Anyone can view Shout Outs, including unregistered users, but only registered users can create, update, and delete them. Additionally, registered users can add comments & rate content shared by others.
+
 ​
 ![Repository Size](https://img.shields.io/github/repo-size/mssjhu9/social-junk?style=plastic)
 >> - Project Repository URL: https://github.com/mssjhu9/social-junk
+
 >> ![Chit Chat Repository](/public/images/repository.png)
 ​
 ## Table of Contents
@@ -58,21 +60,26 @@ The following steps are required to execute the Chit Chat code.
 ​
 ## [Use Instructions](#usage)
 After the installation process, you will need to start the Express server. Just open the project in a terminal application, such as git bash, and type "**npm start**" and press enter. The image below illustrates the process of starting the Express server.
+
 ![Initiate Express Server](/public/images/express.png)
 ​
 ### Home Screen
 At this point the application is unstalled and running. If you have deployed the application locally, you can open url http://localhost:3001. The image below illustrates the application's homepage with the provided seed data. You will note that users are presented with blogs (title & message), username, and post data, as well a the number of comments and user likes (thumbs up). This read-only view is available to the general public, but only authenticated users may create, update and delete content.
+
 ![The Tech Blog](/public/images/screen1.png)
 
 ### View Comments
 Unregistered users can also view comments by clicking on the **comments** link in the lower right-hand section of a post. The image below illustrates the read-only view of user comments for a single post.
+
 ![View Comments](/public/images/screen1a.png)
 
 ### Signup Form
-A user can signup to become a user by clicking on the signup button in the upper right-hand corner. The user is then presented with the signup form illustrated below. After the user has successfully completed and submitted the signup form, the application will create a user session in the database (sessions table) and issue a cookie to the user's browser. 
+A user can signup to become a user by clicking on the signup button in the upper right-hand corner. The user is then presented with the signup form illustrated below. After the user has successfully completed and submitted the signup form, the application will create a user session in the database (sessions table) and issue a cookie to the user's browser.
+
 ![Signup Form](/public/images/screen2.png)
 
 #### Session Creation in MySQL
+
 ![User Sessions In MySQL](/public/images/session1.png)
 
 #### Session Cookie in User Web Browser
@@ -80,10 +87,12 @@ A user can signup to become a user by clicking on the signup button in the upper
 
 ### Login Form
 Subscribed users can login by clicking on the login button in the upper right-hand corner. The user is then presented with the signup form illustrated below. After the user has successfully enters their email address and password, the application will create a user session in the database (sessions table) and issue a cookie to the user's browser - previously illustrated.
+
 ![Login Form](/public/images/screen2b.png)
 
 ### User Dashboard - Create & Edit Your Posts
 Once a user is authenticated, the application will present the 'dashboard' screen, which contains the user's previous posts as well as an function to create a new post. Image below illustrates this screen.
+
 ![Dashboard](/public/images/screen3.png)
 
 ### Edit / Delete Post & Comment / Like Post
@@ -96,6 +105,7 @@ The image below illustrates this screen.
 
 ### Home Screen - Authenticated
 Authenticated users can click on the **home** button, which will present the user with posts from all users as illustrated below. They can also click on **comment** in the lower right-hand corner of a post. The user can then add comments to a post, as well as like (thumbs up) a post as illustrated below.
+
 ![Add a Comment & Like](/public/images/screen5.png)
 
 ### Logout
