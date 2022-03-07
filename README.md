@@ -53,20 +53,24 @@ The following steps are required to execute the Chit Chat code.
 > 2. Install Node.js. You can download the latest version of Node.js at https://nodejs.org/en/.
 > 3. Rename the EXAMPLE_env project file to **.env**. Next open the .env file and enter the the MySQL user and password with sufficient credentials to create, read, update, and delete database tables and data. The default database is name is **socialjunk_db**, but you can change it in the .env without affecting the application.
 > 4. Open the project in a terminal application, such as git bash, and install NPM. To install the dependency packages listed in [Packages & Libraries](#resources), simply type **npm install** and press enter.
-> 5. The application utilizes MYSQL a database named **.env** file, which can be deployed by opening the project in a terminal application, such as git bash, and typing **npm run db** and pressing enter.
->>> NOTE: If you do not have MYSQL, you can download it at https://www.mysql.com/downloads/. 
+> 5. The application utilizes MYSQL a database named **.env** file, which can be deployed by opening the project in a terminal application, such as git bash, and typing **npm run db** and pressing enter. Image below illustrates this function.
+>>> NOTE: If you do not have MYSQL, you can download it at https://www.mysql.com/downloads/.
+
+![Create Database](/images/express1.png)
 ​
 >>> NOTE: You can populate the database with test data by opening the project in a terminal application, such as git bash, and typing **npm run seed** and pressing enter.
+
+![Seed Database](/images/express2.png)
 ​
 ## [Use Instructions](#usage)
 After the installation process, you will need to start the Express server. Just open the project in a terminal application, such as git bash, and type "**npm start**" and press enter. The image below illustrates the process of starting the Express server.
 
-![Initiate Express Server](/public/images/express.png)
+![Initiate Express Server](/public/images/express3.png)
 ​
 ### Home Screen
-At this point the application is unstalled and running. If you have deployed the application locally, you can open url http://localhost:3001. The image below illustrates the application's homepage with the provided seed data. You will note that users are presented with blogs (title & message), username, and post data, as well a the number of comments and user likes (thumbs up). This read-only view is available to the general public, but only authenticated users may create, update and delete content.
+At this point the application is unstalled and running. If you have deployed the application locally, you can open url http://localhost:3001. The image below illustrates the application's homepage with the provided seed data. You will note that users are presented with blogs (title & message), username, and post data, as well a the number of comments and user rating (5-Star rating). This read-only view is available to the general public, but only authenticated users may create, update and delete content.
 
-![The Tech Blog](/public/images/screen1.png)
+![Chit Chat](/public/images/screen1.png)
 
 ### View Comments
 Unregistered users can also view comments by clicking on the **comments** link in the lower right-hand section of a post. The image below illustrates the read-only view of user comments for a single post.
@@ -104,18 +108,13 @@ The image below illustrates this screen.
 ![Update, Delete, Comment, and Like](/public/images/screen4.png)
 
 ### Home Screen - Authenticated
-Authenticated users can click on the **home** button, which will present the user with posts from all users as illustrated below. They can also click on **comment** in the lower right-hand corner of a post. The user can then add comments to a post, as well as like (thumbs up) a post as illustrated below.
+Authenticated users can click on the **home** button, which will present the user with posts from all users as illustrated below. They can also click on **comment** in the lower right-hand corner of a post. The user can then add comments to a post, as well as rate a post (5-star rating) as illustrated below.
 
 ![Add a Comment & Like](/public/images/screen5.png)
 
 ### Logout
 A user can logout by simply clicking the **logout** button in the upper right-hand corner of the screen. Additionally, the application will automatically log a user session out after 5 minutes of idle time (i.e., 300,000 milliseconds). The idle time setting can be found in the public/javascript/script.js file.
 
-​
-## [Tests](#tests)
-No formal testing is available. However, you can seed the database with test data by opening the project in a terminal application, such as git bash, and typing **npm run seed** and pressing enter.
-​
-NOTE: Your testing environment should be different from the production environment described in the [Installation](#installation) section. You can create a test environment following [Installation](#installation) instructions, but you will need to modify the database name in your **.env** file to use your desired test database name.
 ​
 ## [Tests](#tests)
 No formal testing is available. However, you can seed the database with test data by opening the project in a terminal application, such as git bash, and typing **npm run seed** and pressing enter.
