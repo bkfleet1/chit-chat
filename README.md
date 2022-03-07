@@ -56,11 +56,11 @@ The following steps are required to execute the Chit Chat code.
 > 5. The application utilizes MYSQL a database named **.env** file, which can be deployed by opening the project in a terminal application, such as git bash, and typing **npm run db** and pressing enter. Image below illustrates this function.
 >>> NOTE: If you do not have MYSQL, you can download it at https://www.mysql.com/downloads/.
 
-![Create Database](/images/express1.png)
+![Create Database](/public/images/express1.png)
 ​
 >>> NOTE: You can populate the database with test data by opening the project in a terminal application, such as git bash, and typing **npm run seed** and pressing enter.
 
-![Seed Database](/images/express2.png)
+![Seed Database](/public/images/express2.png)
 ​
 ## [Use Instructions](#usage)
 After the installation process, you will need to start the Express server. Just open the project in a terminal application, such as git bash, and type "**npm start**" and press enter. The image below illustrates the process of starting the Express server.
@@ -87,6 +87,7 @@ A user can signup to become a user by clicking on the signup button in the upper
 ![User Sessions In MySQL](/public/images/session1.png)
 
 #### Session Cookie in User Web Browser
+
 ![App Cookie in Web Browser](/public/images/session2.png)
 
 ### Login Form
@@ -105,6 +106,7 @@ In the dashboard view, a user can edit or delete one of their posts, as well as 
 Additonally, the user can append a **comment** or like the post by click the "thumbs up" button.
 
 The image below illustrates this screen.
+
 ![Update, Delete, Comment, and Like](/public/images/screen4.png)
 
 ### Home Screen - Authenticated
@@ -115,7 +117,6 @@ Authenticated users can click on the **home** button, which will present the use
 ### Logout
 A user can logout by simply clicking the **logout** button in the upper right-hand corner of the screen. Additionally, the application will automatically log a user session out after 5 minutes of idle time (i.e., 300,000 milliseconds). The idle time setting can be found in the public/javascript/script.js file.
 
-​
 ## [Tests](#tests)
 No formal testing is available. However, you can seed the database with test data by opening the project in a terminal application, such as git bash, and typing **npm run seed** and pressing enter.
 ​
