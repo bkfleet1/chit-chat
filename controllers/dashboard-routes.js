@@ -110,6 +110,7 @@ router.get("/create/", withAuth, (req, res) => {
           "user_id",
           "photo",
           "video",
+          "rate",
           "created",
         ],
         include: {

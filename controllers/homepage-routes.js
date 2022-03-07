@@ -11,6 +11,7 @@ const { User, Shoutout, Comment, Rating } = require("../models");
         "message",
         "photo",
         "video",
+        "rate",
         "created_at",
         "updated_at",
         [sequelize.literal('(SELECT COUNT(*) FROM rating WHERE shoutout.id = rating.shoutout_id)'), 'rating_count'],
@@ -19,7 +20,7 @@ const { User, Shoutout, Comment, Rating } = require("../models");
       include: [
         {
           model: Comment,
-          attributes: ["id", "user_id", "shoutout_id","message","photo","video", "created_at", "updated_at"],
+          attributes: ["id", "user_id", "shoutout_id","message","photo","video","rate", "created_at", "updated_at"],
           include: [
             {model: User,
               attributes: ["userFname", "userLname", "city", "state"],
@@ -70,6 +71,7 @@ router.get("/shoutout/:id", (req, res) => {
       "message",
       "photo",
       "video",
+      "rate",
       "created_at",
       "updated_at",
       [sequelize.literal('(SELECT COUNT(*) FROM rating WHERE shoutout.id = rating.shoutout_id)'), 'rating_count'],
@@ -78,7 +80,7 @@ router.get("/shoutout/:id", (req, res) => {
     include: [
       {
         model: Comment,
-        attributes: ["id", "user_id", "shoutout_id","message","photo","video", "created_at", "updated_at"],
+        attributes: ["id", "user_id", "shoutout_id","message","photo","video","rate", "created_at", "updated_at"],
         include: [
           {model: User,
             attributes: ["userFname", "userLname", "city", "state"],

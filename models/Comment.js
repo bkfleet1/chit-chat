@@ -42,6 +42,10 @@ Comment.init(
       type: DataTypes.BLOB,
       allowNull: true,
     },
+    rate: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
     created: {
       type: DataTypes.DATE,
       allowNull: true,

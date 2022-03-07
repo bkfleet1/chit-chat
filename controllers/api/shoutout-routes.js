@@ -14,6 +14,7 @@ const withAuth = require("../../utils/auth");
         "message",
         "photo",
         "video",
+        "rate",
         "created_at",
         "updated_at",
         [sequelize.literal('(SELECT COUNT(*) FROM rating WHERE shoutout.id = rating.shoutout_id)'), 'rating_count'],
@@ -22,7 +23,7 @@ const withAuth = require("../../utils/auth");
       include: [
         {
           model: Comment,
-          attributes: ["id", "user_id", "shoutout_id","message","photo","video", "created_at", "updated_at"],
+          attributes: ["id", "user_id", "shoutout_id","message","photo","video","rate", "created_at", "updated_at"],
           include: [
             {model: User,
               attributes: ["userFname", "userLname", "city", "state"],
@@ -49,11 +50,11 @@ router.get("/:id", (req, res) => {
     where: {
       id: req.params.id,
     },
-    attributes: ["id", "user_id", "message", "photo", "video", "created_at", "updated_at"],
+    attributes: ["id", "user_id", "message", "photo", "video","rate" , "created_at", "updated_at"],
     include: [
       {
         model: Comment,
-        attributes: ["id", "user_id", "shoutout_id","message","photo","video", "created_at", "updated_at"],
+        attributes: ["id", "user_id", "shoutout_id","message","photo","video","rate", "created_at", "updated_at"],
         include: [
           {model: User,
             attributes: ["userFname", "userLname", "city", "state"],
