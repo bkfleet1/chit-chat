@@ -1,19 +1,15 @@
-const router = require("express").Router();
+const router = require('express').Router();
 
-const uiEndPoints = require("./ui.js");
-const apiEndPoints = require("./api/");
-const cbEndPoints = require("./cb.js");
-const homepageEndPoints = require("./homepage-routes.js");
-const userMainEndPoints = require("./dashboard-routes.js");
+const apiRoutes = require('./api');
+const homeRoutes = require('./home-routes.js');
+const dashboardRoutes = require('./dashboard-routes.js');
 
-router.use("/", uiEndPoints);
-router.use("/api", apiEndPoints);
-router.use("/cb", cbEndPoints);
-router.use("/", homepageEndPoints);
-router.use("/dashboard", userMainEndPoints);
+router.use('/api', apiRoutes);
+router.use('/', homeRoutes);
+router.use('/dashboard', dashboardRoutes);
 
 router.use((req, res) => {
-  res.send("Invalid endpoint");
+  res.status(404).end();
 });
 
 module.exports = router;

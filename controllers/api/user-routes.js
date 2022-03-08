@@ -1,176 +1,161 @@
-const router = require("express").Router();
-const { User, Shoutout, Comments } = require("../../models");
-const withAuth = require("../../utils/auth");
+const router = require('express').Router();
+const { User, Post, Comment } = require('../../models');
+const withAuth = require('../../utils/auth');
 
-
-// Get All Users Endpoint - /api/users/
-router.get("/", (req, res) => {
-  User.findAll({
-    attributes: ["id", "userFname", "userLname", "city", "state"],
-  })
-    .then((data) => res.json(data))
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
-    });
-});
-
-
-// Get a Single User by id Endpoint - /api/users/:id
-router.get("/:id", (req, res) => {
-  User.findOne({
-    attributes: ["id", "userFname", "userLname", "city", "state"],
-    where: {
-      id: req.params.id,
-    },
-    include: [
-      {
-        model: Shoutout,
-        attributes: ["id", "user_id", "message", "photo", "video"],
-      },
-    //   {
-    //     model: Comments,
-    //     attributes: ["id", "userId", "message"],
-    //     include: {
-    //       model: Shoutout,
-    //       attributes: ["userId"],
-    //     },
-    //   },
-    ],
-  })
-    .then((data) => {
-      if (!data) {
-        res.status(404).json({ message: `Chit Chat did not find user id:${req.params.id}`});
-        return;
-      }
-      res.json(data);
+// GET /api/users
+router.get('/', (req, res) => {
+    // Access our User model and run .findAll() method
+    User.findAll({
+        attributes: { exclude: ['password'] }
     })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
-    });
-});
-
-
-// Create a Single New User Endpoint - POST /api/users/ 
-  // BODY {"userFname": "", "userLname": "", "streetAddress": "", "city": "", "state": "", "zipCode": "", "userEmail": "", "userPassword": ""}
-  //   {
-  //   "userFname": "Laura",
-  //   "userLname": "Chavez",
-  //   "streetAddress": "1888 Downers Lane",
-  //   "city": "Houston",
-  //   "state": "TX",
-  //   "zipCode": "77777",
-  //   "userEmail": "lc@gmail.com",
-  //   "userPassword": "p@ssword4"
-  // }
-  router.post("/", (req, res) => {
-  User.create({
-    userFname: req.body.userFname,
-    userLname: req.body.userLname,
-    streetAddress: req.body.streetAddress,
-    city: req.body.city,
-    state: req.body.state,
-    zipCode: req.body.zipCode,
-    userEmail: req.body.userEmail,
-    userPassword: req.body.userPassword,
-  })
-    .then(data => {
-      req.session.save(() => {
-        req.session.user_id = data.id;
-        req.session.username = data.userEmail;
-        req.session.loggedIn = true;
-
-        res.json(data);
+      .then(dbUserData => res.json(dbUserData))
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
       });
+  });
+
+// GET /api/users/1
+router.get('/:id', (req, res) => {
+    User.findOne({
+        attributes: { exclude: ['password']},
+        where: {
+          id: req.params.id
+        },
+        include: [
+            {
+              model: Post,
+              attributes: ['id', 'title', 'post_content', 'created']
+            },
+            {
+                model: Comment,
+                attributes: ['id', 'comment_text', 'created'],
+                include: {
+                  model: Post,
+                  attributes: ['title']
+                }
+            }
+          ]
+
     })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
-    });
-});
+      .then(dbUserData => {
+        if (!dbUserData) {
+          res.status(404).json({ message: 'No user found with this id' });
+          return;
+        }
+        res.json(dbUserData);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  });
 
-
-// Update a Single User Record by id Endpoint - PUT /api/users/:id
-  // BODY can include one or more of the following: {"userFname": "", "userLname": "", "streetAddress": "", "city": "", "state": "", "zipCode": "", "userEmail": "", "userPassword": ""}
-router.put("/:id", withAuth, (req, res) => {
-  User.update(req.body, {
-    where: {
-      id: req.params.id,
-    },
-  })
-    .then((data) => {
-      if (!data) {
-        res.status(404).json({ message: `Chit Chat could not update the user information, because we did not find user id:${req.params.id}` });
-        return;
-      }
-      res.json(data);
+// POST /api/users
+router.post('/', (req, res) => {
+    User.create({
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password,
+      fName: req.body.fName,
+      lName: req.body.lName
     })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
+    .then(dbUserData => {
+      req.session.save(() => {
+        req.session.user_id = dbUserData.id;
+        req.session.username = dbUserData.username;
+        req.session.fName = dbUserData.fname;
+        req.session.lName = dbUserData.lName;
+        req.session.loggedIn = true;
+    
+        res.json(dbUserData);
+      });
     });
-});
+  });
 
-
-// Delete a Single User by id Endpoint - DELETE /api/users/:id
-router.delete("/:id", withAuth, (req, res) => {
-  User.destroy({
-    where: {
-      id: req.params.id,
-    },
-  })
-    .then((data) => {
-      if (!data) {
-        res.status(404).json({ message: `Chit Chat could not delete the record, because we did not find user id:${req.params.id}. Please try again.` });
-        return;
-      }
-      res.json(data);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
-    });
-});
-
-
-// Login Endpoint - POST /api/users/login
-  // BODY {"userEmail": "", "userPassword": ""}
-  router.post("/login", (req, res) => {
+  // LOGIN
+  router.post('/login', (req, res) => {
     User.findOne({
       where: {
-        userEmail: req.body.userEmail,
-      },
-    }).then((data) => {
-      if (!data) {
-        res.status(400).json({ message: `Chit Chat did not find a user with that email address: ${req.body.userEmail}. Please try again.` });
+        email: req.body.email
+      }
+    }).then(dbUserData => {
+      if (!dbUserData) {
+        res.status(400).json({ message: 'No user with that email address!' });
         return;
       }
-      const validPass = data.checkPassword(req.body.userPassword);
-      if (!validPass) {
-        res.status(400).json({ message: "The password is not valid. Please try again!" });
+  
+      const validPassword = dbUserData.checkPassword(req.body.password);
+  
+      if (!validPassword) {
+        res.status(400).json({ message: 'Incorrect password!' });
         return;
       }
+  
       req.session.save(() => {
-        req.session.user_id = data.id;
-        req.session.userEmail = data.userEmail;
+        // declare session variables
+        req.session.user_id = dbUserData.id;
+        req.session.username = dbUserData.username;
+        req.session.fName = dbUserData.fName;
+        req.session.lName = dbUserData.lName;
         req.session.loggedIn = true;
   
-        res.json({message: "Welcome to Chit Chat. Give a shout out to the world!" });
+        res.json({ user: dbUserData, message: 'You are now logged in!' });
       });
     });
   });
 
 
-// Logout Endpoint - POST /api/users/logout
-router.post("/logout", (req, res) => {
-  if (req.session.loggedIn) {
-    req.session.destroy(() => {
-      res.status(204).end();
-    });
-  } else {
-    res.status(404).end();
-  }
-});
+  router.post('/logout', (req, res) => {
+    if (req.session.loggedIn) {
+      req.session.destroy(() => {
+        res.status(204).end();
+      });
+    }
+    else {
+      res.status(404).end();
+    }
+  });
+
+// PUT /api/users/1
+router.put('/:id', withAuth, (req, res) => {
+    User.update(req.body, {
+        individualHooks: true,
+        where: {
+            id: req.params.id
+      }
+    })
+      .then(dbUserData => {
+        if (!dbUserData[0]) {
+          res.status(404).json({ message: 'No user found with this id' });
+          return;
+        }
+        res.json(dbUserData);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  });
+
+// DELETE /api/users/1
+router.delete('/:id', withAuth, (req, res) => {
+    User.destroy({
+      where: {
+        id: req.params.id
+      }
+    })
+      .then(dbUserData => {
+        if (!dbUserData) {
+          res.status(404).json({ message: 'No user found with this id' });
+          return;
+        }
+        res.json(dbUserData);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  });
 
 module.exports = router;

@@ -1,0 +1,39 @@
+<div class="card mb-6">
+  <header class="card-header card-header-title has-background-grey-lighter">
+    
+    <div class="column">
+        <p class=" has-text-primary-light"></p>
+        <a href="/post/{{id}}"  class="has-text-black is-capitalized is-pulled-left">{{title}} </a></p>
+      </div>
+{{!-- 
+      <div class="column">
+      <span class=""> </span>
+      </div> --}}
+    
+  </header>
+
+    <div class="card-content">
+        <div class="content has-text-justified">
+            {{post_content}} 
+            {{!-- <div id="scroll3" style="width:200;height:100; background-color:white; overflow:auto" style="border: solid 3x #000000" style="text-align:center"><font face="comic sans" size="3"><b><a style="color:blue" href="http://yourlinkinhere.com" target='blank'></a><br><a style="color:blue" href="http://yourlinkinhere.com" target='blank'>link</a><br></div> --}}
+        </div>
+    </div>
+
+{{#if rating_average }}
+    <div class = "is-pulled-left">Rated </div>
+    <div class="Stars is-pulled-left"
+          style="--rating: {{rating_average}};"></div>
+    <div class = "is-pulled-left">
+            by {{comment_count}} {{ format_plural "person" comment_count }}
+    </div>
+    {{else}}
+        <div class="is-pulled-left"></div>
+ {{/if}}   
+    <div class="is-pulled-right">
+                <b>{{user.username}}</b> | 
+                <a href="https://youtu.be/dwBhYBHKPi8/{{user.lName}}"><i class="fab fa-lName"></i></a> 
+                <a href="http://localhost:3001/dashboard"><i class="fab fa-fName"></i></a>
+                 | {{format_date created}} | <a href="/post/{{id}}">{{comments.length}} {{format_plural "comment" comments.length}}</a>
+    </div>
+        
+</div>

@@ -1,14 +1,9 @@
 const router = require("express").Router();
 const sequelize = require("../config/connection");
 const { Post, User, Comment } = require("../models");
-const withAuth = require("../utils/auth");
 
-router.get("/", withAuth, (req, res) => {
+router.get("/", (req, res) => {
   Post.findAll({
-    where: {
-      // use the ID from the session
-      user_id: req.session.user_id,
-    },
     attributes: [
       "id",
       "title",
@@ -37,9 +32,11 @@ router.get("/", withAuth, (req, res) => {
     ],
   })
     .then((dbPostData) => {
-      // serialize data before passing to template
       const posts = dbPostData.map((post) => post.get({ plain: true }));
-      res.render("dashboard", { posts, loggedIn: true });
+      res.render("homepage", {
+        posts,
+        loggedIn: req.session.loggedIn,
+      });
     })
     .catch((err) => {
       console.log(err);
@@ -47,7 +44,25 @@ router.get("/", withAuth, (req, res) => {
     });
 });
 
-router.get("/edit/:id", withAuth, (req, res) => {
+router.get("/login", (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect("/");
+    return;
+  }
+
+  res.render("login");
+});
+
+router.get("/signup", (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect("/");
+    return;
+  }
+
+  res.render("signup");
+});
+
+router.get("/post/:id", (req, res) => {
   Post.findOne({
     where: {
       id: req.params.id,
@@ -88,54 +103,11 @@ router.get("/edit/:id", withAuth, (req, res) => {
       // serialize the data
       const post = dbPostData.get({ plain: true });
 
-      res.render("edit-post", {
+      // pass data to template
+      res.render("single-post", {
         post,
-        loggedIn: true,
+        loggedIn: req.session.loggedIn,
       });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
-    });
-});
-
-router.get("/create/", withAuth, (req, res) => {
-  Post.findAll({
-    where: {
-      // use the ID from the session
-      user_id: req.session.user_id,
-    },
-    attributes: [
-      "id",
-      "title",
-      "post_content",
-      "photo",
-      "video",
-      "rate",
-      "created",
-      [sequelize.literal('(SELECT COUNT(*) FROM comment WHERE post.id = comment.post_id)'), 'comment_count'],
-      [sequelize.literal('(SELECT AVG(rate) FROM comment WHERE post.id = comment.post_id)'), 'rating_average'],
-    ],
-    include: [
-      {
-        model: Comment,
-        attributes: ["id", "user_id", "post_id","comment_text","photo","video","rate","created"],
-        include: [
-          {model: User,
-            attributes: ["username"],
-          },
-        ],
-      },
-      {
-        model: User,
-        attributes: ["username"],
-      },
-    ],
-  })
-    .then((dbPostData) => {
-      // serialize data before passing to template
-      const posts = dbPostData.map((post) => post.get({ plain: true }));
-      res.render("create-post", { posts, loggedIn: true });
     })
     .catch((err) => {
       console.log(err);
