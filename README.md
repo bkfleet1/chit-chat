@@ -42,7 +42,7 @@ The following resources were used in the development of this project.
 > - Sequelize (version 6.17.0)
 ​
 ## [Tech Stack](#stack)
-![79.8% Javascript](https://img.shields.io/badge/javascript-79.8%25-green) ![15.5% Handlebars](https://img.shields.io/badge/handlebars-15.5%25-green) ![4.7% CSS](https://img.shields.io/badge/CSS-4.7%25-green)
+![79.8% Javascript](https://img.shields.io/badge/javascript-79.8%25-blue) ![15.5% Handlebars](https://img.shields.io/badge/handlebars-15.5%25-blue) ![4.7% CSS](https://img.shields.io/badge/CSS-4.7%25-blue)
 > - Handlebars
 > - JavaScript
 > - CSS
@@ -80,7 +80,7 @@ Unregistered users can also view comments by clicking on the **comments** link i
 ### Signup Form
 A user can signup to become a user by clicking on the signup button in the upper right-hand corner. The user is then presented with the signup form illustrated below. After the user has successfully completed and submitted the signup form, the application will create a user session in the database (sessions table) and issue a cookie to the user's browser.
 
-![Signup Form](/public/images/screen2.png)
+![Signup Form](/public/images/screen3.png)
 
 #### Session Creation in MySQL
 
@@ -93,26 +93,29 @@ A user can signup to become a user by clicking on the signup button in the upper
 ### Login Form
 Subscribed users can login by clicking on the login button in the upper right-hand corner. The user is then presented with the signup form illustrated below. After the user has successfully enters their email address and password, the application will create a user session in the database (sessions table) and issue a cookie to the user's browser - previously illustrated.
 
-![Login Form](/public/images/screen2b.png)
+![Login Form](/public/images/screen2.png)
 
-### User Dashboard - Create & Edit Your Posts
-Once a user is authenticated, the application will present the 'dashboard' screen, which contains the user's previous posts as well as an function to create a new post. Image below illustrates this screen.
+### User Dashboard 
+Once a user is authenticated, the application will present the 'dashboard' screen, which contains the user's previous Shout Outs as well as an function to create and edit Shout Outs. Image below illustrates this screen.
 
-![Dashboard](/public/images/screen3.png)
+![Dashboard](/public/images/screen4.png)
 
-### Edit / Delete Post & Comment / Like Post
-In the dashboard view, a user can edit or delete one of their posts, as well as append a comment and like their own post by clicking on the **edit** button located below the post. The application present the user with their previous post in edit-mode. The user can chose to modify and **save** their post, **delete** the post, or return to their personal dashboard by clicking the **dashboard** button in the upper right-hand corner of the screen. 
+#### Create Shout Out
+The user can create a new Shout Out by clicking on the **create** button or the **create Shout Out** link in the upper right-hand corner of the user's **dashboard**. The user can add a title and message in their Shout Out and click the **create** button to post their message. The image below illustrates the Shout Out creation screen.
 
-Additonally, the user can append a **comment** or like the post by click the "thumbs up" button.
+![Create Shout Out](/public/images/screen5.png)
+
+#### Edit & Delete a Shout Out
+In the dashboard view, a user can edit and delete one of their shouts by clicking the **edit** button located below a post. The application present the user with their previous post in edit-mode. The user can chose to modify and **save** their post, **delete** the post, or exit the function by clicking the **dashboard** button in the upper right-hand corner of the screen. 
 
 The image below illustrates this screen.
 
-![Update, Delete, Comment, and Like](/public/images/screen4.png)
+![Edit & Delete a Shout Out](/public/images/screen6.png)
 
 ### Home Screen - Authenticated
 Authenticated users can click on the **home** button, which will present the user with posts from all users as illustrated below. They can also click on **comment** in the lower right-hand corner of a post. The user can then add comments to a post, as well as rate a post (5-star rating) as illustrated below.
 
-![Add a Comment & Like](/public/images/screen5.png)
+![Add a Comment & Rate It](/public/images/screen7.png)
 
 ### Logout
 A user can logout by simply clicking the **logout** button in the upper right-hand corner of the screen. Additionally, the application will automatically log a user session out after 5 minutes of idle time (i.e., 300,000 milliseconds). The idle time setting can be found in the public/javascript/script.js file.

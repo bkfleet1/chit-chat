@@ -1,7 +1,7 @@
 {
   "name": "social-junk",
   "version": "1.0.0",
-  "description": "",
+  "description": "Chit Chat is a mobile-responsive, social media platform on which users can post messages and pictures - known as Shout Outs. Anyone can view Shout Outs, including unregistered users, but only registered users can create, update, and delete them. Additionally, registered users can add comments & rate content shared by others.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -13,8 +13,8 @@
     "type": "git",
     "url": "git+https://github.com/mssjhu9/social-junk.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["social media","blog"],
+  "author": "Maria Jayakumar,Chance Telford,Jamie Jackson,Brad Kelley",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/mssjhu9/social-junk/issues"
