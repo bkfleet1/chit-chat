@@ -2,6 +2,7 @@ const router = require("express").Router();
 const { Post, User, Comment } = require("../../models");
 const sequelize = require("../../config/connection");
 const withAuth = require("../../utils/auth");
+const { registerDecorator } = require("handlebars");
 
 // get all users
 router.get("/", (req, res) => {
@@ -120,6 +121,7 @@ router.post("/", withAuth, (req, res) => {
   Post.create({
     title: req.body.title,
     post_content: req.body.post_content,
+    media: req.body.media,
     user_id: req.session.user_id,
   })
     .then((dbPostData) => res.json(dbPostData))
@@ -133,7 +135,7 @@ router.put("/:id", withAuth, (req, res) => {
   Post.update(
     {
       title: req.body.title,
-      post_content: req.body.post_content,
+      post_content: req.body.post_content
     },
     {
       where: {

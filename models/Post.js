@@ -40,6 +40,10 @@ Post.init(
       type: DataTypes.BLOB,
       allowNull: true,
     },
+    media: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
     rate: {
       type: DataTypes.INTEGER,
       allowNull: true
