@@ -39,6 +39,14 @@ Post.init(
       type: DataTypes.BLOB,
       allowNull: true,
     },
+    file: {
+      type: DataTypes.BLOB,
+      allowNull: true,
+    },
+    file_text: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
   },
   {
     sequelize,

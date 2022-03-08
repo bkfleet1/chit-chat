@@ -2,14 +2,23 @@
     <a href="/dashboard" class="is-pulled-right"> &larr; back to dashboard</a>
   <h2 class="title">Create New Shoutout</h2><hr>
 
-  <form class="new-post-form">
+  <form class="new-post-form"
+            action="/upload"
+            method="POST"
+            enctype="multipart/form-data">
     <div>
       <label for="post-title">Title:</label>
-      <input class="input" type="text" id="post-title" name="post-title" placeholder="comments"/>
+      <input type="text" class="input" id="post-title" name="post-title" placeholder="comments"/>
     </div>
     <div>
       <label for="post-content">Shoutout:</label>
       <input class="textarea is-large" id="post-content" name="post-content" placeholder="comments"/>
+    </div>
+    <div>
+    <input type="file" class="form-control-file" name="file">
+    {{!-- <input type="text" class="form-control" name="file_text" placeholder="file desc" > --}}
+    {{!-- <input type="submit" value="Get me the stats!" class="btn btn-default">             --}}
+  </div>
     </div>
     <button type="submit" class="button is-primary is-pulled-right">Create Shoutout</button>
   </form>

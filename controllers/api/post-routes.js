@@ -2,6 +2,8 @@ const router = require("express").Router();
 const { Post, User, Comment } = require("../../models");
 const sequelize = require("../../config/connection");
 const withAuth = require("../../utils/auth");
+const multer  = require('multer')
+const upload = multer({ dest: '../../public/data/uploads/' })
 
 // get all users
 router.get("/", (req, res) => {
@@ -65,10 +67,12 @@ router.get("/:id", (req, res) => {
     });
 });
 
-router.post("/", withAuth, (req, res) => {
+router.post("/", withAuth, upload.single('file'), (req, res) => {
   Post.create({
     title: req.body.title,
     post_content: req.body.post_content,
+    file: req.file.file,
+    // file_text: req.body.file_text,
     user_id: req.session.user_id,
   })
     .then((dbPostData) => res.json(dbPostData))
