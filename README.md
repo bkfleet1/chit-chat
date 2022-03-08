@@ -3,7 +3,8 @@
 ## [Description](#description)
 Chit Chat is a mobile-responsive, social media platform on which users can post messages and pictures - known as "Shout Outs". Anyone can view Shout Outs, including unregistered users, but only registered users can create, update, and delete them. Additionally, registered users can add comments & rate content shared by others.
 
-​
+>> - Deployed Application URL: https://chitchat2022.herokuapp.com/​
+
 ![Repository Size](https://img.shields.io/github/repo-size/mssjhu9/social-junk?style=plastic)
 >> - Project Repository URL: https://github.com/mssjhu9/social-junk
 
@@ -42,7 +43,7 @@ The following resources were used in the development of this project.
 > - Sequelize (version 6.17.0)
 ​
 ## [Tech Stack](#stack)
-![79.8% Javascript](https://img.shields.io/badge/javascript-79.8%25-blue) ![15.5% Handlebars](https://img.shields.io/badge/handlebars-15.5%25-blue) ![4.7% CSS](https://img.shields.io/badge/CSS-4.7%25-blue)
+![70.1% Javascript](https://img.shields.io/badge/javascript-70.1%25-blue) ![19.0% Handlebars](https://img.shields.io/badge/handlebars-19.0%25-blue) ![10.9% CSS](https://img.shields.io/badge/CSS-10.9%25-blue)
 > - Handlebars
 > - JavaScript
 > - CSS
