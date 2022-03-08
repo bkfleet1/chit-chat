@@ -39,6 +39,10 @@ Post.init(
       type: DataTypes.BLOB,
       allowNull: true,
     },
+    rate: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
   },
   {
     sequelize,
