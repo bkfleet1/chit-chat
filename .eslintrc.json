@@ -25,5 +25,9 @@
         "semi": ["error", "always"],
         "radix": "off"
     },
-    "extends": ["prettier"]
+    "extends": ["prettier"],
+    "parserOptions": {
+        "ecmaVersion": 8,
+        "sourceType": "module"
+      }
 }

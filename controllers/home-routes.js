@@ -12,18 +12,33 @@ router.get("/", (req, res) => {
       "video",
       "rate",
       "created",
-      [sequelize.literal('(SELECT COUNT(*) FROM comment WHERE post.id = comment.post_id)'), 'comment_count'],
-      [sequelize.literal('(SELECT AVG(rate) FROM comment WHERE post.id = comment.post_id)'), 'rating_average'],
+      [
+        sequelize.literal(
+          "(SELECT COUNT(*) FROM comment WHERE post.id = comment.post_id)"
+        ),
+        "comment_count",
+      ],
+      [
+        sequelize.literal(
+          "(SELECT AVG(rate) FROM comment WHERE post.id = comment.post_id)"
+        ),
+        "rating_average",
+      ],
     ],
     include: [
       {
         model: Comment,
-        attributes: ["id", "user_id", "post_id","comment_text","photo","video","rate","created"],
-        include: [
-          {model: User,
-            attributes: ["username"],
-          },
+        attributes: [
+          "id",
+          "user_id",
+          "post_id",
+          "comment_text",
+          "photo",
+          "video",
+          "rate",
+          "created",
         ],
+        include: [{ model: User, attributes: ["username"] }],
       },
       {
         model: User,
@@ -75,18 +90,33 @@ router.get("/post/:id", (req, res) => {
       "video",
       "rate",
       "created",
-      [sequelize.literal('(SELECT COUNT(*) FROM comment WHERE post.id = comment.post_id)'), 'comment_count'],
-      [sequelize.literal('(SELECT AVG(rate) FROM comment WHERE post.id = comment.post_id)'), 'rating_average'],
+      [
+        sequelize.literal(
+          "(SELECT COUNT(*) FROM comment WHERE post.id = comment.post_id)"
+        ),
+        "comment_count",
+      ],
+      [
+        sequelize.literal(
+          "(SELECT AVG(rate) FROM comment WHERE post.id = comment.post_id)"
+        ),
+        "rating_average",
+      ],
     ],
     include: [
       {
         model: Comment,
-        attributes: ["id", "user_id", "post_id","comment_text","photo","video","rate","created"],
-        include: [
-          {model: User,
-            attributes: ["username"],
-          },
+        attributes: [
+          "id",
+          "user_id",
+          "post_id",
+          "comment_text",
+          "photo",
+          "video",
+          "rate",
+          "created",
         ],
+        include: [{ model: User, attributes: ["username"] }],
       },
       {
         model: User,

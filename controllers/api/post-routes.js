@@ -11,15 +11,33 @@ router.get("/", (req, res) => {
       "title",
       "post_content",
       "created",
-      [sequelize.literal('(SELECT COUNT(*) FROM comment WHERE post.id = comment.post_id)'), 'comment_count'],
-      [sequelize.literal('(SELECT AVG(rate) FROM comment WHERE post.id = comment.post_id)'), 'rating_average'],
+      [
+        sequelize.literal(
+          "(SELECT COUNT(*) FROM comment WHERE post.id = comment.post_id)"
+        ),
+        "comment_count",
+      ],
+      [
+        sequelize.literal(
+          "(SELECT AVG(rate) FROM comment WHERE post.id = comment.post_id)"
+        ),
+        "rating_average",
+      ],
     ],
     order: [["created", "DESC"]],
     include: [
-  
       {
         model: Comment,
-        attributes: ["id", "comment_text", "post_id", "user_id", "video","photo","rate","created"],
+        attributes: [
+          "id",
+          "comment_text",
+          "post_id",
+          "user_id",
+          "video",
+          "photo",
+          "rate",
+          "created",
+        ],
         include: {
           model: User,
           attributes: ["username"],
@@ -48,8 +66,18 @@ router.get("/:id", (req, res) => {
       "title",
       "post_content",
       "created",
-      [sequelize.literal('(SELECT COUNT(*) FROM comment WHERE post.id = comment.post_id)'), 'comment_count'],
-      [sequelize.literal('(SELECT AVG(rate) FROM comment WHERE post.id = comment.post_id)'), 'rating_average'],
+      [
+        sequelize.literal(
+          "(SELECT COUNT(*) FROM comment WHERE post.id = comment.post_id)"
+        ),
+        "comment_count",
+      ],
+      [
+        sequelize.literal(
+          "(SELECT AVG(rate) FROM comment WHERE post.id = comment.post_id)"
+        ),
+        "rating_average",
+      ],
     ],
     include: [
       {
@@ -58,7 +86,16 @@ router.get("/:id", (req, res) => {
       },
       {
         model: Comment,
-        attributes: ["id", "comment_text", "post_id", "user_id", "video","photo","rate", "created"],
+        attributes: [
+          "id",
+          "comment_text",
+          "post_id",
+          "user_id",
+          "video",
+          "photo",
+          "rate",
+          "created",
+        ],
         include: {
           model: User,
           attributes: ["username", "fname", "lname"],
