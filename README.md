@@ -22,10 +22,10 @@ Chit Chat is a mobile-responsive, social media platform on which users can post 
 > - [Questions](#questions)
 ​
 ## Developers
-1. Maria Jayakumar
-2. Chance Telford
-3. Jamie Jackson
-4. Brad Kelley
+1. [Maria Jayakumar](https://github.com/mssjhu9)
+2. [Chance Telford](https://github.com/TelChance)
+3. [Jamie Jackson](https://github.com/JJackson510)
+4. [Brad Kelley](https://github.com/bkfleet1)
 ​
 ## [Packages & Libraries](#resources)
 The following resources were used in the development of this project.
@@ -128,8 +128,8 @@ NOTE: Your testing environment should be different from the production environme
 ​
 ## [Questions](#questions)
 Please email one of the following developers with any questions.
-> * [Maria Jayakumar](mailto:email@email.com)
-> * [Chance Telford](mailto:email@email.com)
-> * [Jamie Jackson](mailto:email@email.com)
+> * [Maria Jayakumar](mailto:mssjhu9@gmail.com)
+> * [Chance Telford](mailto:chancetelford0018@gmail.com)
+> * [Jamie Jackson](mailto:Jamiej.jj5@gmail.com)
 > * [Brad Kelley](mailto:bradkelleytech@gmail.com) 
 
