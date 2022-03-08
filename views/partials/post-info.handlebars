@@ -17,6 +17,11 @@
             {{post_content}} 
             {{!-- <div id="scroll3" style="width:200;height:100; background-color:white; overflow:auto" style="border: solid 3x #000000" style="text-align:center"><font face="comic sans" size="3"><b><a style="color:blue" href="http://yourlinkinhere.com" target='blank'></a><br><a style="color:blue" href="http://yourlinkinhere.com" target='blank'>link</a><br></div> --}}
         </div>
+        {{#if media}}
+        <div>
+            <img id="uploadedimage" class="uploadedimage" src="{{media}}"></img> 
+        </div>
+        {{/if}}  
     </div>
 
 {{#if rating_average }}

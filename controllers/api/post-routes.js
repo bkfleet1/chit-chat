@@ -11,6 +11,7 @@ router.get("/", (req, res) => {
       "id",
       "title",
       "post_content",
+      "media",
       "created",
       [
         sequelize.literal(
@@ -66,6 +67,7 @@ router.get("/:id", (req, res) => {
       "id",
       "title",
       "post_content",
+      "media",
       "created",
       [
         sequelize.literal(
@@ -135,7 +137,7 @@ router.put("/:id", withAuth, (req, res) => {
   Post.update(
     {
       title: req.body.title,
-      post_content: req.body.post_content
+      post_content: req.body.post_content,
     },
     {
       where: {
