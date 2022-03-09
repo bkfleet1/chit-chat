@@ -9,6 +9,10 @@
     "seed": "node seeds/index.js",
     "db": "node db/index.js"
   },
+  "engines": {
+    "node": "16.13.2",
+    "npm": "8.1.2"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mssjhu9/social-junk.git"
