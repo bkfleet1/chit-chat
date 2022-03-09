@@ -14,6 +14,7 @@ Post.init(
     },
     user_id: {
       type: DataTypes.INTEGER,
+      allowNull: true,
       references: {
         model: "user",
         key: "id",
@@ -37,6 +38,10 @@ Post.init(
     },
     video: {
       type: DataTypes.BLOB,
+      allowNull: true,
+    },
+    media: {
+      type: DataTypes.TEXT,
       allowNull: true,
     },
     rate: {

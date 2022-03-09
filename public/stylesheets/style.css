@@ -20,6 +20,11 @@
     color: #3486eb;
   }
   
+#uploadedimage{
+  max-width: 200px;
+  max-height: 200px;
+}
+
   button {
     border: 0;
     padding: 1%;

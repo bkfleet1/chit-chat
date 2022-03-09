@@ -13,7 +13,7 @@ Comment.init(
     },
     user_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       references: {
         model: "user",
         key: "id",
@@ -21,7 +21,7 @@ Comment.init(
     },
     post_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       references: {
         model: "post",
         key: "id",
@@ -34,7 +34,7 @@ Comment.init(
         len: [1],
       },
     },
-     photo: {
+    photo: {
       type: DataTypes.BLOB,
       allowNull: true,
     },
@@ -44,7 +44,7 @@ Comment.init(
     },
     rate: {
       type: DataTypes.INTEGER,
-      allowNull: true
+      allowNull: true,
     },
     created: {
       type: DataTypes.DATE,

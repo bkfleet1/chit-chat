@@ -2,6 +2,7 @@ const router = require("express").Router();
 const { Post, User, Comment } = require("../../models");
 const sequelize = require("../../config/connection");
 const withAuth = require("../../utils/auth");
+const { registerDecorator } = require("handlebars");
 
 // get all users
 router.get("/", (req, res) => {
@@ -10,16 +11,35 @@ router.get("/", (req, res) => {
       "id",
       "title",
       "post_content",
+      "media",
       "created",
-      [sequelize.literal('(SELECT COUNT(*) FROM comment WHERE post.id = comment.post_id)'), 'comment_count'],
-      [sequelize.literal('(SELECT AVG(rate) FROM comment WHERE post.id = comment.post_id)'), 'rating_average'],
+      [
+        sequelize.literal(
+          "(SELECT COUNT(*) FROM comment WHERE post.id = comment.post_id)"
+        ),
+        "comment_count",
+      ],
+      [
+        sequelize.literal(
+          "(SELECT AVG(rate) FROM comment WHERE post.id = comment.post_id)"
+        ),
+        "rating_average",
+      ],
     ],
     order: [["created", "DESC"]],
     include: [
-  
       {
         model: Comment,
-        attributes: ["id", "comment_text", "post_id", "user_id", "video","photo","rate","created"],
+        attributes: [
+          "id",
+          "comment_text",
+          "post_id",
+          "user_id",
+          "video",
+          "photo",
+          "rate",
+          "created",
+        ],
         include: {
           model: User,
           attributes: ["username"],
@@ -47,9 +67,20 @@ router.get("/:id", (req, res) => {
       "id",
       "title",
       "post_content",
+      "media",
       "created",
-      [sequelize.literal('(SELECT COUNT(*) FROM comment WHERE post.id = comment.post_id)'), 'comment_count'],
-      [sequelize.literal('(SELECT AVG(rate) FROM comment WHERE post.id = comment.post_id)'), 'rating_average'],
+      [
+        sequelize.literal(
+          "(SELECT COUNT(*) FROM comment WHERE post.id = comment.post_id)"
+        ),
+        "comment_count",
+      ],
+      [
+        sequelize.literal(
+          "(SELECT AVG(rate) FROM comment WHERE post.id = comment.post_id)"
+        ),
+        "rating_average",
+      ],
     ],
     include: [
       {
@@ -58,7 +89,16 @@ router.get("/:id", (req, res) => {
       },
       {
         model: Comment,
-        attributes: ["id", "comment_text", "post_id", "user_id", "video","photo","rate", "created"],
+        attributes: [
+          "id",
+          "comment_text",
+          "post_id",
+          "user_id",
+          "video",
+          "photo",
+          "rate",
+          "created",
+        ],
         include: {
           model: User,
           attributes: ["username", "fname", "lname"],
@@ -83,6 +123,7 @@ router.post("/", withAuth, (req, res) => {
   Post.create({
     title: req.body.title,
     post_content: req.body.post_content,
+    media: req.body.media,
     user_id: req.session.user_id,
   })
     .then((dbPostData) => res.json(dbPostData))
