@@ -31,13 +31,13 @@ Chit Chat is a mobile-responsive, social media platform on which users can post 
 The following resources were used in the development of this project.
 > - Bcrypt (version 5.0.1);
 > - Bootstrap (version 5.1.3);
+> - Cloudinary (https://cloudinary.com/)
 > - Connect Session Sequelize (version 7.1.2);
 > - Dotenv (version 16.0.0);
 > - Express (version 4.17.3);
 > - Express Handlebars (version 6.0.2);
 > - Express Session (version 1.17.2);
 > - Handlebars (version 4.7.7);
-> - Multer (version 1.4.4);
 > - MySQL Server (version 8.0.28);
 > - MySQL2 (version 2.3.3); and
 > - Sequelize (version 6.17.0)
@@ -102,9 +102,15 @@ Once a user is authenticated, the application will present the 'dashboard' scree
 ![Dashboard](/public/images/screen4.png)
 
 #### Create Shout Out
-The user can create a new Shout Out by clicking on the **create** button or the **create Shout Out** link in the upper right-hand corner of the user's **dashboard**. The user can add a title and message in their Shout Out and click the **create** button to post their message. The image below illustrates the Shout Out creation screen.
+The user can create a new Shout Out by clicking on the **create** button or the **create Shout Out** link in the upper right-hand corner of the user's **dashboard**. The user can add a title, message, and **upload image** in their Shout Out and click the **create** button to post their message. The image below illustrates the Shout Out creation screen.
 
-![Create Shout Out](/public/images/screen5.png)
+![Create Shout Out](/public/images/screen5a.png)
+
+![Create Shout Out Screen](/public/images/screen5b.png)
+
+Click the **upload image** button to launch the image attachment function.
+![Upload Image](/public/images/screen5c.png)
+
 
 #### Edit & Delete a Shout Out
 In the dashboard view, a user can edit and delete one of their shouts by clicking the **edit** button located below a post. The application present the user with their previous post in edit-mode. The user can chose to modify and **save** their post, **delete** the post, or exit the function by clicking the **dashboard** button in the upper right-hand corner of the screen. 
