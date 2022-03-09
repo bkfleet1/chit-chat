@@ -31,8 +31,6 @@ async function deleteFormHandler(event) {
       } else {
         alert(response.statusText);
       }
-   
-  }
 }
 
 document
