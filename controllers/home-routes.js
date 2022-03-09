@@ -11,6 +11,7 @@ router.get("/", (req, res) => {
       "photo",
       "video",
       "rate",
+      "media",
       "created",
       [
         sequelize.literal(
@@ -89,6 +90,7 @@ router.get("/post/:id", (req, res) => {
       "photo",
       "video",
       "rate",
+      "media",
       "created",
       [
         sequelize.literal(
